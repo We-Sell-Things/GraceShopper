@@ -4,7 +4,7 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_PRODUCTS = 'GET_USER'
+const GET_PRODUCTS = 'GET_PRODUCTS'
 
 /**
  * INITIAL STATE
@@ -23,6 +23,7 @@ const getProducts = products => ({type: GET_PRODUCTS, products})
 export const fetchProducts = () =>
   dispatch =>
     axios.get('/api/products')
+      .then(res => res.data)
       .then(products => {
         dispatch(getProducts(products))
       })

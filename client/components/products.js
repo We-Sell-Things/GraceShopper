@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 // import {logout} from '../store'
 
 const Products = ({ products }) => {
+  console.log('PRoducts: ', products);
   return (
     <div>
     { products.length
