@@ -11,7 +11,7 @@ const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 
 export const fetchSingleProduct = (id) =>
   dispatch =>
-    axios.get(`/api/product/${id}`)
+    axios.get(`/api/products/${id}`)
       .then(res => res.data)
       .then(product => {
         const action = getSingleProduct(product);
