@@ -29,6 +29,12 @@ const Product = db.define('product', {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   }
+}, {
+  getterMethods: {
+    showPrice() {
+      return '$' + this.price;
+    }
+  }
 })
 
 module.exports = Product

@@ -11,3 +11,11 @@ router.get('/', (req, res, next) => {
   .then(products => res.json(products))
   .catch(next);
 });
+
+//get a single product
+router.get('/:id', (req, res, next) => {
+  //find by id and add eager loading
+  Product.findById(req.params.id, { include: [{ all: true }]})
+  .then(product => res.json(product))
+  .catch(next);
+});
