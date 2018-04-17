@@ -25,9 +25,9 @@ async function seed () {
   ])
 
   const products = await Promise.all([
-    Product.create({title: 'Potato Bag Opener', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: 'http://lorempixel.com/400/200', categories: 'kitchen'}),
-    Product.create({title: 'Beer underwear', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: 'http://lorempixel.com/400/200', categories: 'kitchen'}),
-    Product.create({title: 'Computer monitor cover', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: 'http://lorempixel.com/400/200', categories: 'technology'})
+    Product.create({title: 'Potato Bag Opener', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: 'http://lorempixel.com/400/200', categories: ['kitchen']}),
+    Product.create({title: 'Beer underwear', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: 'http://lorempixel.com/400/200', categories: ['kitchen']}),
+    Product.create({title: 'Computer monitor cover', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: 'http://lorempixel.com/400/200', categories: ['technology']})
   ])
 
 
