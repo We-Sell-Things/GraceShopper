@@ -6,7 +6,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
   Product.findAll({
     //select just a few attributes to show
-    attributes: ['id', 'title', 'description', 'price']
+    attributes: ['id', 'title', 'description', 'price', 'imgUrl', 'category']
   })
   .then(products => res.json(products))
   .catch(next);
