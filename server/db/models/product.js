@@ -25,7 +25,7 @@ const Product = db.define('product', {
     type: Sequelize.STRING(10000),
     defaultValue: defaultProductImg
   },
-  category: {
+  categories: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   }
