@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import FilterSearchBar from './FilterSearchBar'
 import { Menu, Container, Icon } from 'semantic-ui-react'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <Menu>
     <Menu.Item as='a' href="/">We Sell Stuff</Menu.Item>
+    <FilterSearchBar />
       {isLoggedIn ? (
         <Menu.Menu position='right'>
           {/* The navbar will show these links after you log in */}
