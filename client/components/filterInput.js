@@ -8,15 +8,15 @@ const FilterInput = (props) => {
 
 
 
-return (
-  <form>
-  <input
-  onChange={handleChange}
-  value={inputValue}
-  placeholder="Search"
-  />
-  </form>
-)
+  return (
+    <form>
+      <input
+        onChange={handleChange}
+        value={inputValue}
+        placeholder="Search"
+      />
+    </form>
+  )
 }
 
 export default FilterInput;
