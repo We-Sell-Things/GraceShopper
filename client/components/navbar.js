@@ -4,32 +4,28 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import FilterSearchBar from './FilterSearchBar'
+import { Menu, Container, Icon } from 'semantic-ui-react'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>We Sell Stuff</h1>
-    <h4>as well as things!</h4>
-    <nav>
+  <Menu>
+    <Menu.Item as='a' href="/">We Sell Stuff</Menu.Item>
+    <FilterSearchBar />
       {isLoggedIn ? (
-        <div>
+        <Menu.Menu position='right'>
           {/* The navbar will show these links after you log in */}
-          <filterSearchBar />
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
+          <Menu.Item as='a' href="/home">Home</Menu.Item>
+          <Menu.Item as='a' href="#" onClick={handleClick}>Logout</Menu.Item>
+          <Menu.Item as='a' href="/shoppingCart"><Icon name="shop" /></Menu.Item>
+        </Menu.Menu>
       ) : (
-        <div>
+        <Menu.Menu position='right'>
           {/* The navbar will show these links before you log in */}
-          <FilterSearchBar />
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+          <Menu.Item as='a' href="/login">Login</Menu.Item>
+          <Menu.Item as='a' href="/signup">Sign Up</Menu.Item>
+          <Menu.Item as='a' href="/shoppingCart"><Icon name="shop" /></Menu.Item>
+        </Menu.Menu>
       )}
-    </nav>
-    <hr />
-  </div>
+  </Menu>
 )
 
 /**
