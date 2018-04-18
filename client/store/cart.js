@@ -10,7 +10,10 @@ const getCart = cart => ({
   cart
 });
 
-
+const addToCart = product => ({
+  type: ADD_TO_CART,
+  product
+})
 
 //get single cart thunk
 export const fetchSingleCart = (id) => dispatch =>
@@ -21,6 +24,9 @@ export const fetchSingleCart = (id) => dispatch =>
     dispatch(action);
   })
   .catch(err => console.log(err));
+
+//add to cart thunk
+// export const fetch
 
 //reducer
 const singleCart = [];
