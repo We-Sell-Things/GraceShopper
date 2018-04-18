@@ -1,0 +1,11 @@
+- More description in issues
+- Lots of little PRs: yeS!
+- Delete stale branches
+- Edison: https://help.github.com/articles/setting-your-commit-email-address-in-git/
+- Good that commits are getting more descriptive
+- Standardize the format, e.g. [like this](https://seesparkbox.com/foundry/semantic_commit_messages)
+- Nice small commits: yeS!
+- Make the README your own
+- Like the comments, more of it!
+- Testing!
+- A dropdown component that might help you: https://react.semantic-ui.com/modules/dropdown

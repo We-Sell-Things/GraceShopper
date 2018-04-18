@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import store from '../store'
 import {fetchSingleProduct} from '../store/singleProduct'
+// OB: commented out code should never make it master
 // import { connect } from 'tls';
 import {connect} from 'react-redux';
 
@@ -49,6 +50,7 @@ const mapDispatch = (dispatch, ownProps) => (
 )
 
 const mapState = function (state) {
+  // OB: consider having no redundant data, and finding product using the match params id and the all products state (no separate single product state)
   return {
     singleProduct: state.singleProduct
   }

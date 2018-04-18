@@ -28,6 +28,7 @@ export const fetchProducts = () =>
         dispatch(getProducts(products))
       })
       .catch(err => console.log(err))
+      // OB: like the error handler, consider something that will report to the user, e.g. toastr https://github.com/tomchentw/react-toastr
 
 /**
  * REDUCER

@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 // import {logout} from '../store'
 
 const Products = ({ products }) => {
+  // OB: logs should be burned
   console.log('PRoducts: ', products);
   return (
     <div>
