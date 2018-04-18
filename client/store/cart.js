@@ -26,7 +26,8 @@ export const fetchSingleCart = (id) => dispatch =>
   .catch(err => console.log(err));
 
 //add to cart thunk
-// export const fetch
+// export const postToCart = (productId) => dispatch =>
+//   axios.post(`/api/cart/${}`)
 
 //reducer
 const singleCart = [];
