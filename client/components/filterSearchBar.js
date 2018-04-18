@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FilterInput from './FilterInput';
 import {connect} from 'react-redux';
+import VirtualizedSelect from 'react-virtualized-select';
 
 
 export class FilterSearchBar extends Component {
@@ -35,6 +36,15 @@ return (
   handleChange={this.handleChange}
   inputValue={inputValue}
   />
+  <VirtualizedSelect
+  options={this.props.products}
+  simpleValue
+  clearable
+  name="select-product"
+  searchable
+  labelkey="name"
+  valueKey="name"
+  />
   </div>
 )
 }
@@ -57,3 +67,20 @@ const mapDispatch = dispatch => {
 
 
 export default connect(mapState, mapDispatch)(FilterSearchBar)
+
+
+// return (
+//   <div>
+//   <FilterInput
+//   handleChange={this.handleChange}
+//   inputValue={inputValue}
+//   />
+//   <select>
+//   {filteredProducts.map(product =>
+//   <option key={product.id}>{product.title}</option>
+//   )}
+//   </select>
+//   </div>
+// )
+// }
+// }
