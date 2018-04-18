@@ -23,7 +23,7 @@ export const fetchSingleProduct = (id) =>
 export default function (state = singleProduct, action) {
   switch (action.type) {
     case GET_SINGLE_PRODUCT:
-      return action.singleProduct
+      return action.product
 
       default:
         return state
