@@ -33,6 +33,7 @@ const Products = ({ products, handleAdd }) => {
                   </Grid.Column>
                 </Grid>
               </div>
+              </Grid.Column>
           )
         })
       }
