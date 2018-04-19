@@ -5,8 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Products} from './components'
 import {me, fetchProducts, fetchSingleCart} from './store'
 import SingleProduct from './components/SingleProduct';
-import Cart from './components/Cart';
-
+import Cart from './components/cart'
 /**
  * COMPONENT
  */
@@ -23,6 +22,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/shoppingCart" component={ Cart } />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart" component={Cart} />
         {

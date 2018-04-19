@@ -15,20 +15,25 @@ const Products = ({ products, handleAdd }) => {
         products.map(product => {
           return (
             <Grid.Column key={ product.id } style={{border: '3px blue'}}>
+
               <div>
                 <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                 <Image src={ product.imgUrl } />
-                <Container>
-                  <h5 color="green">{ product.showPrice }</h5>
-                  <Button animated='vertical' color="blue" onClick={() => handleAdd(product.id) }>
-                    <Button.Content hidden>Add to Cart</Button.Content>
-                    <Button.Content visible>
-                      <Icon name='shop' />
-                    </Button.Content>
-                  </Button>
-                </Container>
+                <Grid columns={2} justify-content="space-between">
+                  <Grid.Column>
+                    <h5 color="green">{ product.showPrice }</h5>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button animated='fade' color="green" onClick={() => handleAdd(product.id) }>
+                      <Button.Content visible>Add to Cart</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name='shop' />
+                      </Button.Content>
+                    </Button>
+                  </Grid.Column>
+                </Grid>
               </div>
-            </Grid.Column>
+              </Grid.Column>
           )
         })
       }

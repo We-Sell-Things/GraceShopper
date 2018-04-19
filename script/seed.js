@@ -12,6 +12,7 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Product} = require('../server/db/models')
+const {Category} = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -24,10 +25,21 @@ async function seed () {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const categories = await Promise.all([
+    Category.create({name: 'kitchen'}),
+    Category.create({name: 'technology'}),
+    Category.create({name: 'music'}),
+    Category.create({name: 'nonsense'}),
+    Category.create({name: 'food'}),
+    Category.create({name: 'goodies'})
+  ])
+
   const products = await Promise.all([
-    Product.create({title: 'Potato Bag Opener', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: 'http://lorempixel.com/400/200', categories: ['kitchen']}),
-    Product.create({title: 'Beer underwear', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: 'http://lorempixel.com/400/200', categories: ['kitchen']}),
-    Product.create({title: 'Computer monitor cover', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: 'http://lorempixel.com/400/200', categories: ['technology']})
+    Product.create({title: 'Potato Bag Opener', quantity: '5', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: '/pics/bagopener.jpg', categoryId: '1'}),
+    Product.create({title: 'Beer underwear', quantity: '5', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: '/pics/beerunderwear.jpg', categoryId: '1'}),
+    Product.create({title: 'Computer monitor cover', quantity: '5', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: '/pics/screencover.jpg', categoryId: '2'}),
+    Product.create({title: 'Computer usb lamp', quantity: '5', description: 'For when you need extra brightness to your screen!', price: '2', imgUrl: '/pics/usblamp.jpg', categoryId: '2'}),
+    Product.create({title: 'Beer warmer', quantity: '5', description: 'For when your beer is too cold and it needs to be warmed!', price: '52', imgUrl: '/pics/beerwarmer.jpg', categoryId: '1'})
   ])
 
 
@@ -35,6 +47,7 @@ async function seed () {
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${categories.length} categories`)
   console.log(`seeded successfully`)
 }
 

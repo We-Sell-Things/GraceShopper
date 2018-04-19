@@ -28,15 +28,7 @@ const Product = db.define('product', {
   },
   imgUrl: {
     type: Sequelize.STRING(10000),
-    defaultValue: defaultProductImg,
-    validate: {
-      isUrl: true
-    }
-  },
-  categories: {
-    // OB: viable option, but if querying by category is slow, consider indexing
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: false
+    defaultValue: defaultProductImg
   }
 }, {
   getterMethods: {

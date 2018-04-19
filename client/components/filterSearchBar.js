@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterInput from './FilterInput';
 import { connect } from 'react-redux';
-import VirtualizedSelect from 'react-virtualized-select';
+import { Dropdown } from 'semantic-ui-react'
 
 
 export class FilterSearchBar extends Component {
@@ -10,41 +10,30 @@ export class FilterSearchBar extends Component {
     this.state = {
       inputValue: ''
     };
-
-
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-
-  handleChange(evt) {
-    const value = evt.target.value;
-    this.setState({
-      inputValue: value
-    });
   }
 
   render() {
     const inputValue = this.state.inputValue;
     const filteredProducts = this.props.products.filter(product =>
       product.title.match(inputValue));
-
-
+    const options = [];
+    const { handleSubmit } = this.props;
+    this.props.products.map(product =>
+      options.push({ text: product.title, key: product.id })
+    )
+    console.log(options)
     return (
       <div>
-        <FilterInput
-          handleChange={this.handleChange}
-          inputValue={inputValue}
+
+
+        <Dropdown
+        className="searchbar"
+        placeholder="Select Product" fluid search
+        key={options}
+        selection options={options}
+          onLabelClick={handleSubmit}
         />
-        <VirtualizedSelect
-          options={this.props.products}
-          simpleValue
-          clearable
-          name="select-product"
-          searchable
-          labelkey="name"
-          valueKey="name"
-        />
+
       </div>
     )
   }
@@ -58,9 +47,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // handleClick() {
-    //   dispatch(logout())
-    // }
+    handleSubmit: (event => {
+      event.preventDefault();
+      console.log('hi', event.target.value);
+    })
   }
 }
 
@@ -84,3 +74,31 @@ export default connect(mapState, mapDispatch)(FilterSearchBar)
 // )
 // }
 // }
+
+
+
+// <VirtualizedSelect
+//           options={this.props.products}
+//           simpleValue
+//           clearable
+//           name="select-product"
+//           searchable
+//           labelkey="name"
+//           valueKey="name"
+//         />
+
+
+// <FilterInput
+// handleChange={this.handleChange}
+// inputValue={inputValue}
+// />
+// <select>
+// {filteredProducts.map(product =>
+//   <option key={product.id}>{product.title}</option>
+// )}
+// </select>
+
+
+// this.handleChange = this.handleChange.bind(this);
+
+//

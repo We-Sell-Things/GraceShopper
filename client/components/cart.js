@@ -6,7 +6,6 @@ import {fetchSingleCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 import { postToCart } from '../store'
 
-
 export class Cart extends Component {
 
   render() {
