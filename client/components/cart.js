@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-
+import fetchSingleCart from '../store/cart'
 
 export class Cart extends Component {
-
 
   ComponentDidMount() {
   this.props.fetchData();
@@ -14,8 +13,6 @@ export class Cart extends Component {
 
 
   render() {
-
-
     return(
       <div>
       EMPTY SHOPPING CART!
@@ -26,14 +23,19 @@ export class Cart extends Component {
 
 }
 
-// const mapDispatch = (dispatch, ownProps) => (
-//   {
-//     fetchData: () => {
-//       const id
-//     }
-//   }
-// )
+const mapDispatch = (dispatch) => (
+  {
+    fetchData: () => {
+      dispatch(fetchSingleCart());
+    }
+  }
+)
+
+const mapState = function (state) {
+  return {
+    products: state.defaultCart
+  }
+}
 
 
-
-export default connect(null, null)(Cart);
+export default connect(mapState, mapDispatch)(Cart);

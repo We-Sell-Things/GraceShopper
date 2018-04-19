@@ -13,7 +13,8 @@ const Products = ({ products }) => {
         // map over each product in store creating a div box
         products.map(product => {
           return (
-            <NavLink to={`/products/${product.id}`} key={ product.id }>
+            <div key={ product.id }>
+            <NavLink to={`/products/${product.id}`}>
               <div>
                 <h3>{ product.title }</h3>
                 <h5>{ product.showPrice }</h5>
@@ -22,6 +23,8 @@ const Products = ({ products }) => {
                 <img src={ product.imgUrl } />
               </div>
             </NavLink>
+            <button>Add to Cart</button>
+            </div>
           )
         })
       }

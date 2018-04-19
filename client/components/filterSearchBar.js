@@ -29,6 +29,7 @@ export class FilterSearchBar extends Component {
         <Dropdown
         className="searchbar"
         placeholder="Select Product" fluid search selection options={options}
+        key={options.id}
           onLabelClick={handleSubmit}
         />
 
