@@ -8,14 +8,11 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const productId = req.body.productId;
-  console.log('product ID ', req.body.productId);
-  console.log('CART BEFORE   ', req.session.cart);
   if (req.session.cart[productId]) {
     req.session.cart[productId]++
   } else {
     req.session.cart[productId] = 1;
   }
-  console.log('CART BEFORE   ', req.session.cart);
   res.json(req.session.cart);
 })
 

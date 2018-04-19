@@ -51,7 +51,6 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleAdd: function(productId) {
-      console.log(productId)
       dispatch(postToCart(productId))
     }
   }
