@@ -2,31 +2,32 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-// import {logout} from '../store'
+import { Grid, Image, Icon } from 'semantic-ui-react'
 
 const Products = ({ products }) => {
   console.log('PRoducts: ', products);
   return (
     <div>
     { products.length
-    ? <div>
+    ? <Grid centered columns={3} style={{margin: '30px'}}>
       { //if products has length, start the map
         // map over each product in store creating a div box
         products.map(product => {
           return (
-            <NavLink to={`/products/${product.id}`} key={ product.id }>
+            <Grid.Column as='a' href={`/products/${product.id}`} key={ product.id } >
               <div>
                 <h3>{ product.title }</h3>
-                <h5>{ product.showPrice }</h5>
+                <Image src={ product.imgUrl } />
+                <div>
+                  <h5 color="green">{ product.showPrice }</h5>
+                  <Icon name="add to cart" />
+                </div>
               </div>
-              <div>
-                <img src={ product.imgUrl } />
-              </div>
-            </NavLink>
+            </Grid.Column>
           )
         })
       }
-      </div>
+      </Grid>
     : <h4>There are no products in the database!</h4> //display this message if database is empty
     }
     </div>
