@@ -34,10 +34,10 @@ export const fetchSingleCart = () => dispatch =>
 
 //add to cart thunk
 export const postToCart = (productId) => dispatch =>
-  axios.post('/api/cart/', productId)
+  axios.post('/api/cart/', {productId})
   .then(res => res.data)
-  .then(newProductId => {
-    const action = addToCart(newProductId)
+  .then(productId => {
+    const action = addToCart(productId)
     dispatch(action);
   })
   .catch(err => console.log(err));
