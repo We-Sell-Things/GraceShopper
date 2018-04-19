@@ -1,25 +1,14 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import store from '../store'
-import {fetchSingleProduct} from '../store/singleProduct'
-// import { connect } from 'tls';
+import store from '../store';
+import {fetchSingleProduct} from '../store/singleProduct';
 import {connect} from 'react-redux';
 
-
 export class SingleProduct extends Component {
-
 
   componentDidMount() {
     this.props.fetchData();
   }
-
-
-
-  // console.log(props)
-  // const productId = +props.match.params.productId;
-
-
-
 
   render() {
     const product = this.props.singleProduct;

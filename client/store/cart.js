@@ -27,6 +27,7 @@ export const fetchSingleCart = () => dispatch =>
   axios.get('/api/cart/')
   .then(res => res.data)
   .then(cart => {
+    console.log("CART!!!!!!!", cart)
     const action = getCart(cart);
     dispatch(action);
   })
@@ -34,10 +35,10 @@ export const fetchSingleCart = () => dispatch =>
 
 //add to cart thunk
 export const postToCart = (productId) => dispatch =>
-  axios.post('/api/cart/', productId)
+  axios.post('/api/cart/', {productId})
   .then(res => res.data)
-  .then(newProductId => {
-    const action = addToCart(newProductId)
+  .then(productId => {
+    const action = addToCart(productId)
     dispatch(action);
   })
   .catch(err => console.log(err));
@@ -52,7 +53,7 @@ export const deleteFromCart = (productId) => dispatch =>
   .catch(err => console.log(err));
 
 //reducer
-const defaultCart = [];
+const defaultCart = {};
 
 export default function(state = defaultCart, action){
   switch (action.type){
