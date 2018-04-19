@@ -1,29 +1,30 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-// import {connect} from 'react-redux'
-// import {NavLink} from 'react-router-dom'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {NavLink} from 'react-router-dom'
 
 
-// export class Cart extends Component {
+export class Cart extends Component {
 
 
-//   ComponentDidMount() {
-//   this.props.fetchData();
-//   }
+  ComponentDidMount() {
+  this.props.fetchData();
+  }
 
 
 
-//   render() {
+  render() {
 
 
-//     return(
-//       <div>
-//       </div>
-//     )
-//   }
+    return(
+      <div>
+      EMPTY SHOPPING CART!
+      </div>
+    )
+  }
 
 
-// }
+}
 
 // const mapDispatch = (dispatch, ownProps) => (
 //   {
@@ -35,4 +36,4 @@
 
 
 
-// export default connect(mapState, mapDispatch)(Cart);
+export default connect(null, null)(Cart);
