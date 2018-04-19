@@ -15,6 +15,7 @@ const Products = ({ products, handleAdd }) => {
         products.map(product => {
           return (
             <Grid.Column key={ product.id } style={{border: '3px blue'}}>
+
               <div>
                 <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                 <Image src={ product.imgUrl } />
@@ -28,7 +29,6 @@ const Products = ({ products, handleAdd }) => {
                   </Button>
                 </Container>
               </div>
-            </Grid.Column>
           )
         })
       }

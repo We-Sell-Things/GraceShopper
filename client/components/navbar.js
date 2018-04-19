@@ -8,7 +8,7 @@ import { Menu, Container, Icon } from 'semantic-ui-react'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <Menu>
-    <Menu.Item as='a' href="/">We Sell Stuff</Menu.Item>
+    <Menu.Item as='a' href="/products">We Sell Stuff</Menu.Item>
     <FilterSearchBar />
       {isLoggedIn ? (
         <Menu.Menu position='right'>
