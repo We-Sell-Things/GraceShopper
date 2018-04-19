@@ -12,7 +12,7 @@ router.post('/', (req, res, next) => {
   if (req.session.cart[productId]) {
     req.session.cart.productId++
   } else {
-    req.session.cart[productId] = 1;
+    req.session.cart.productId = 1;
   }
   next();
 })
