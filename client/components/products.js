@@ -2,33 +2,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-// import {logout} from '../store'
+import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react'
+import { postToCart } from '../store'
 
-const Products = ({ products }) => {
+const Products = ({ products, handleAdd }) => {
   return (
     <div>
     { products.length
-    ? <div>
+    ? <Grid columns={3} style={{margin: '30px'}}>
       { //if products has length, start the map
         // map over each product in store creating a div box
         products.map(product => {
           return (
-            <div key={ product.id }>
-            <NavLink to={`/products/${product.id}`}>
+            <Grid.Column key={ product.id } style={{border: '3px blue'}}>
+
               <div>
-                <h3>{ product.title }</h3>
-                <h5>{ product.showPrice }</h5>
+                <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
+                <Image src={ product.imgUrl } />
+                <Container>
+                  <h5 color="green">{ product.showPrice }</h5>
+                  <Button animated='vertical' color="blue" onClick={() => handleAdd(product.id) }>
+                    <Button.Content hidden>Add to Cart</Button.Content>
+                    <Button.Content visible>
+                      <Icon name='shop' />
+                    </Button.Content>
+                  </Button>
+                </Container>
               </div>
-              <div>
-                <img src={ product.imgUrl } />
-              </div>
-            </NavLink>
-            <button>Add to Cart</button>
-            </div>
           )
         })
       }
-      </div>
+      </Grid>
     : <h4>There are no products in the database!</h4> //display this message if database is empty
     }
     </div>
@@ -46,9 +50,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // handleClick() {
-    //   dispatch(logout())
-    // }
+    handleAdd: function(productId) {
+      dispatch(postToCart(productId))
+    }
   }
 }
 

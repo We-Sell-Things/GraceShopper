@@ -23,8 +23,8 @@ const removeFromCart = product => ({
 });
 
 //get single cart thunk
-export const fetchSingleCart = (id) => dispatch =>
-  axios.get(`/api/cart/${id}`)
+export const fetchSingleCart = () => dispatch =>
+  axios.get('/api/cart/')
   .then(res => res.data)
   .then(cart => {
     const action = getCart(cart);
@@ -33,18 +33,18 @@ export const fetchSingleCart = (id) => dispatch =>
   .catch(err => console.log(err));
 
 //add to cart thunk
-export const postToCart = (id, productId) => dispatch =>
-  axios.post(`/api/cart/${id}`, productId)
+export const postToCart = (productId) => dispatch =>
+  axios.post('/api/cart/', {productId})
   .then(res => res.data)
-  .then(newProductId => {
-    const action = addToCart(newProductId)
+  .then(productId => {
+    const action = addToCart(productId)
     dispatch(action);
   })
   .catch(err => console.log(err));
 
 //remove from cart thunk
-export const deleteFromCart = (id, productId) => dispatch =>
-  axios.delete(`/api/cart/${id}`)
+export const deleteFromCart = (productId) => dispatch =>
+  axios.delete('/api/cart/')
   .then(() => {
     const action = removeFromCart(productId);
     dispatch(action);
