@@ -19,17 +19,18 @@ export class FilterSearchBar extends Component {
     const options = [];
     const { handleSubmit } = this.props;
     this.props.products.map(product =>
-      options.push({ text: product.title, id: product.id })
+      options.push({ text: product.title, key: product.id })
     )
-
+    console.log(options)
     return (
       <div>
 
 
         <Dropdown
         className="searchbar"
-        placeholder="Select Product" fluid search selection options={options}
-        key={options.id}
+        placeholder="Select Product" fluid search
+        key={options}
+        selection options={options}
           onLabelClick={handleSubmit}
         />
 
