@@ -11,7 +11,7 @@ const getCategories = categories => ({
 });
 
 //thunk creator to get all the categories
-export const fetchProducts = () =>
+export const fetchCategories = () =>
   dispatch =>
     axios.get('/api/categories')
       .then(res => res.data)
