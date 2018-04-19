@@ -25,11 +25,11 @@ async function seed () {
   ])
 
   const products = await Promise.all([
-    Product.create({title: 'Potato Bag Opener', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: '/pics/bagopener.jpg', categories: ['kitchen']}),
-    Product.create({title: 'Beer underwear', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: '/pics/beerunderwear.jpg', categories: ['kitchen']}),
-    Product.create({title: 'Computer monitor cover', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: '/pics/screencover.jpg', categories: ['technology']}),
-    Product.create({title: 'Computer usb lamp', description: 'For when you need extra brightness to your screen!', price: '2', imgUrl: '/pics/usblamp.jpg', categories: ['technology']}),
-    Product.create({title: 'Beer warmer', description: 'For when your beer is too cold and it needs to be warmed!', price: '52', imgUrl: '/pics/beerwarmer.jpg', categories: ['technology']})
+    Product.create({title: 'Potato Bag Opener', quantity: '5', description: 'Opens potato bags easily so you dont have to!', price: '25', imgUrl: '/pics/bagopener.jpg', categories: ['kitchen']}),
+    Product.create({title: 'Beer underwear', quantity: '5', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: '/pics/beerunderwear.jpg', categories: ['kitchen']}),
+    Product.create({title: 'Computer monitor cover', quantity: '5', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: '/pics/screencover.jpg', categories: ['technology']}),
+    Product.create({title: 'Computer usb lamp', quantity: '5', description: 'For when you need extra brightness to your screen!', price: '2', imgUrl: '/pics/usblamp.jpg', categories: ['technology']}),
+    Product.create({title: 'Beer warmer', quantity: '5', description: 'For when your beer is too cold and it needs to be warmed!', price: '52', imgUrl: '/pics/beerwarmer.jpg', categories: ['technology']})
   ])
 
 
