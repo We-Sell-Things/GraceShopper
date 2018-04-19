@@ -13,7 +13,7 @@ const Category = require('./category');
 Cart.belongsTo(User);
 Cart.hasMany(Product);
 Product.belongsTo(Category);
-Category.hasMany(Product);
+Category.hasMany(Product, { onDelete: 'cascade', hooks: true });
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
