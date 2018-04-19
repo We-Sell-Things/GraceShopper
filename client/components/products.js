@@ -2,25 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import { Grid, Image, Icon } from 'semantic-ui-react'
+import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react'
+import { postToCart } from '../store'
 
-const Products = ({ products }) => {
+const Products = ({ products, handleAdd }) => {
   return (
     <div>
     { products.length
-    ? <Grid centered columns={3} style={{margin: '30px'}}>
+    ? <Grid columns={3} style={{margin: '30px'}}>
       { //if products has length, start the map
         // map over each product in store creating a div box
         products.map(product => {
           return (
-            <Grid.Column as='a' href={`/products/${product.id}`} key={ product.id } >
+            <Grid.Column key={ product.id } style={{border: '3px blue'}}>
               <div>
-                <h3>{ product.title }</h3>
+                <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                 <Image src={ product.imgUrl } />
-                <div>
+                <Container>
                   <h5 color="green">{ product.showPrice }</h5>
-                  <Icon name="add to cart" />
-                </div>
+                  <Button animated='vertical' color="blue" onClick={() => handleAdd(product.id) }>
+                    <Button.Content hidden>Add to Cart</Button.Content>
+                    <Button.Content visible>
+                      <Icon name='shop' />
+                    </Button.Content>
+                  </Button>
+                </Container>
               </div>
             </Grid.Column>
           )
@@ -44,9 +50,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // handleClick() {
-    //   dispatch(logout())
-    // }
+    handleAdd: function(productId) {
+      console.log(productId)
+      dispatch(postToCart(productId))
+    }
   }
 }
 
