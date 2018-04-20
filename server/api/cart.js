@@ -20,11 +20,9 @@ router.put('/', (req, res, next) => {
   const productId = req.body.productId;
   if (req.session.cart[productId] > 1){
     req.session.cart[productId]--;
-    console.log(req.session.cart);
     res.json(req.session.cart);
   } else {
     delete req.session.cart[productId];
-    console.log(req.session.cart);
     res.json(req.session.cart);
   }
 })
