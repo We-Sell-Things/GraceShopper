@@ -7,9 +7,7 @@ import {Grid, Image, Icon} from 'semantic-ui-react'
 
 export class Cart extends Component {
 
-  // componentDidMount() {
-  //   this.props.loadCart()
-  // }
+
 
   render() {
     const productsInCart = [];
@@ -41,7 +39,7 @@ export class Cart extends Component {
             return (
               <Grid.Column as='a' key={ product.id } >
                 <div>
-                  <h3>{ product.title }</h3>
+                  <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                   <Image src={ product.imgUrl } />
                   <div>
                     <h5 color="green">{ product.showPrice }</h5>
@@ -55,10 +53,11 @@ export class Cart extends Component {
           })
 
         }
-        <h2>Subtotal: ${total} </h2>
+
         </Grid>
       : <h4>There are no products in the Cart!</h4> //display this message if database is empty
       }
+      <h2><center>Subtotal: ${total} </center></h2>
       </div>
     )
   }
