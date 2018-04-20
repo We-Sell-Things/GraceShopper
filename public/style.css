@@ -1,3 +1,10 @@
+img.ui.image {
+  display: block;
+  height: 200px;
+  width: 280px;
+  margin-bottom: 15px;
+}
+
 body {
   font-family: sans-serif;
 }
