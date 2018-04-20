@@ -21,4 +21,9 @@ router.put('/', (req, res, next) => {
   req.session.cart[productId]--
   res.json(req.session.cart);
 })
+
+
+router.get('/cart', (req, res, next) => {
+  res.json(req.session.cart);
+})
 // router.delete

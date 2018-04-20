@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import {deleteFromCart, postToCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 
-export class Cart extends Component {
+export class Checkout extends Component {
 
 
 
@@ -48,8 +48,6 @@ export class Cart extends Component {
                     <button onClick={() => handleSubtract(product.id)}>Subtract</button>
                   </div>
                   <h2>Subtotal: {total} </h2>
-
-                  <h3><b href={'/cart/checkout'}>Checkout</b></h3>
                 </div>
               </Grid.Column>
             )
@@ -82,4 +80,4 @@ const mapState = function (state) {
   }
 }
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapState, mapDispatch)(Checkout);
