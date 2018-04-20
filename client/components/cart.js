@@ -8,7 +8,6 @@ import {Grid, Image, Icon} from 'semantic-ui-react'
 export class Cart extends Component {
 
 
-
   render() {
     const productsInCart = [];
     const productIds = Object.keys(this.props.cart);
@@ -28,7 +27,6 @@ export class Cart extends Component {
     })
 
 
-
     return (
       <div>
       { productsInCart.length
@@ -37,7 +35,7 @@ export class Cart extends Component {
           // map over each product in store creating a div box
           productsInCart.map(product => {
             return (
-              <Grid.Column as='a' key={ product.id } >
+              <Grid.Column as="a" key={ product.id } >
                 <div>
                   <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                   <Image src={ product.imgUrl } />
