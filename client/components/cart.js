@@ -17,14 +17,19 @@ export class Cart extends Component {
     const { handleSubtract } = this.props;
     const { handleAdd } = this.props;
 
+    let total = 0;
+
     productIds.forEach(id => {
       this.props.products.filter(product => {
         if (+product.id === +id) {
           product.quantity = this.props.cart[id]
+          total += (product.quantity * product.price)
           productsInCart.push(product)
         }
       })
     })
+
+
 
     return (
       <div>
@@ -44,6 +49,7 @@ export class Cart extends Component {
                     <button onClick={() => handleAdd(product.id)}>Add</button>
                     <button onClick={() => handleSubtract(product.id)}>Subtract</button>
                   </div>
+                  <h2>Subtotal: {total} </h2>
                 </div>
               </Grid.Column>
             )
