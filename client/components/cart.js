@@ -7,9 +7,7 @@ import {Grid, Image, Icon} from 'semantic-ui-react'
 
 export class Cart extends Component {
 
-  // componentDidMount() {
-  //   this.props.loadCart()
-  // }
+
 
   render() {
     const productsInCart = [];
