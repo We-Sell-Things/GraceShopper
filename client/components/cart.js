@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import {deleteFromCart, postToCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 
@@ -45,9 +45,7 @@ export class Cart extends Component {
                     <button onClick={() => handleAdd(product.id)}>Add</button>
                     { product.quantity > 0 ? <button onClick={() => handleSubtract(product.id)}>Subtract</button> : <h3>Item deleted</h3>}
                   </div>
-                  <h2>Subtotal: {total} </h2>
 
-                  <h3><b href={'/cart/checkout'}>Checkout</b></h3>
                 </div>
               </Grid.Column>
             )
@@ -59,6 +57,8 @@ export class Cart extends Component {
       : <h4>There are no products in the Cart!</h4> //display this message if database is empty
       }
       <h2><center>Subtotal: ${total} </center></h2>
+      <h3><Link to={'/cart/checkout'}>Checkout</Link></h3>
+
       </div>
     )
   }
