@@ -62,7 +62,6 @@ export default function(state = defaultCart, action){
     case ADD_TO_CART:
       return action.cart;
     case REMOVE_FROM_CART:
-    console.log('ACTION DELETE CART', action)
     return action.cart;
     default: return state;
   }
