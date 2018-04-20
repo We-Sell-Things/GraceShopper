@@ -3,7 +3,11 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Products} from './components'
+<<<<<<< HEAD
 import {me, fetchProducts, fetchCategories} from './store'
+=======
+import {me, fetchProducts, fetchSingleCart} from './store'
+>>>>>>> master
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/cart'
 /**
@@ -25,6 +29,7 @@ class Routes extends Component {
         <Route exact path="/products" component={ Products } />
         <Route exact path="/shoppingCart" component={ Cart } />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path="/cart" component={Cart} />
         {
           isLoggedIn &&
             <Switch>
@@ -56,6 +61,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me())
       dispatch(fetchProducts())
       dispatch(fetchCategories())
+      dispatch(fetchSingleCart())
     }
   }
 }

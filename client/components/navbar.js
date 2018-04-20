@@ -15,14 +15,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           {/* The navbar will show these links after you log in */}
           <Menu.Item as='a' href="/home">Home</Menu.Item>
           <Menu.Item as='a' href="#" onClick={handleClick}>Logout</Menu.Item>
-          <Menu.Item as='a' href="/shoppingCart"><Icon name="shop" /></Menu.Item>
+          <Menu.Item as='a' href="/cart"><Icon name="shop" /></Menu.Item>
         </Menu.Menu>
       ) : (
         <Menu.Menu position='right'>
           {/* The navbar will show these links before you log in */}
           <Menu.Item as='a' href="/login">Login</Menu.Item>
           <Menu.Item as='a' href="/signup">Sign Up</Menu.Item>
-          <Menu.Item as='a' href="/shoppingCart"><Icon name="shop" /></Menu.Item>
+          <Menu.Item as='a' href="/cart"><Icon name="shop" /></Menu.Item>
         </Menu.Menu>
       )}
   </Menu>

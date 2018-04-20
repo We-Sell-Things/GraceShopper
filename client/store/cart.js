@@ -12,14 +12,14 @@ const getCart = cart => ({
   cart
 });
 
-const addToCart = product => ({
+const addToCart = cart => ({
   type: ADD_TO_CART,
-  product
+  cart
 });
 
-const removeFromCart = product => ({
+const removeFromCart = cart => ({
   type: REMOVE_FROM_CART,
-  product
+  cart
 });
 
 //get single cart thunk
@@ -36,32 +36,33 @@ export const fetchSingleCart = () => dispatch =>
 export const postToCart = (productId) => dispatch =>
   axios.post('/api/cart/', {productId})
   .then(res => res.data)
-  .then(productId => {
-    const action = addToCart(productId)
+  .then(updatedCart => {
+    const action = addToCart(updatedCart)
     dispatch(action);
   })
   .catch(err => console.log(err));
 
 //remove from cart thunk
 export const deleteFromCart = (productId) => dispatch =>
-  axios.delete('/api/cart/')
-  .then(() => {
-    const action = removeFromCart(productId);
+  axios.put('/api/cart/', {productId})
+  .then(res => res.data)
+  .then((updatedCart) => {
+    const action = removeFromCart(updatedCart);
     dispatch(action);
   })
   .catch(err => console.log(err));
 
 //reducer
-const defaultCart = [];
+const defaultCart = {};
 
 export default function(state = defaultCart, action){
   switch (action.type){
     case GET_CART:
       return action.cart;
     case ADD_TO_CART:
-      return [...state, action.product];
+      return action.cart;
     case REMOVE_FROM_CART:
-      return state.filter(product => product !== action.product)
+    return action.cart;
     default: return state;
   }
 }

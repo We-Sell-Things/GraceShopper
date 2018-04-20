@@ -25,7 +25,7 @@ export default function (state = singleProduct, action) {
     case GET_SINGLE_PRODUCT:
       return action.product
 
-      default:
-        return state
+    default:
+      return state
   }
 }
