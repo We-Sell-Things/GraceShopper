@@ -21,7 +21,7 @@ export class SingleProduct extends Component {
         <div>
           <h3>{ product.title }</h3>
           <p>{ product.description }</p>
-          <h5>{ product.price }</h5>
+          <h5>Price: { product.price }</h5>
           <Button animated='fade' color="green" onClick={() => handleClick(product.id) }>
           <Button.Content visible>Add to Cart</Button.Content>
           <Button.Content hidden>
