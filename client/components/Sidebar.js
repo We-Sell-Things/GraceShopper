@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react';
+import { Grid, Image, Icon, Button, Container, Sidebar, Menu, Header } from 'semantic-ui-react';
 import {NavLink} from 'react-router-dom';
 
 const Categories = ({categories}) => {
   return (
     <div>
-      <h1>Categories</h1>
      {
        categories.length ?
-        <Grid columns={1} style={{margin: '30px', float: 'left'}}>
-        {categories.map(category => {
-          return (
-            <Grid.Column key={category.id} style={{border: '3px blue'}}>
-              <div>
-              <NavLink to={`/categories/${category.id}`}>
-                <h3>{category.name}</h3>
-              </NavLink>
-              </div>
-            </Grid.Column>
-          )
-        })}
-        </Grid>
+       <Sidebar as={Menu} width='thin' visible='visible' vertical inverted>
+       <Header as='h3' style={{color: 'white'}}>Categories</Header>
+        {
+          categories.map(category => {
+            return (
+              <Menu.Item key={category.id}>
+                <NavLink to={`/categories/${category.id}`}>
+                <h3>{category.name}</h3></NavLink>
+              </Menu.Item>
+            )
+          })
+        }
+       </Sidebar>
       : <h4>There are no categories in the database!</h4>
      }
     </div>
