@@ -45,7 +45,7 @@ export class Cart extends Component {
                     <h5 color="green">{ product.showPrice }</h5>
                     <h5>Quantity: {product.quantity}</h5>
                     <button onClick={() => handleAdd(product.id)}>Add</button>
-                    <button onClick={() => handleSubtract(product.id)}>Subtract</button>
+                    { product.quantity > 0 ? <button onClick={() => handleSubtract(product.id)}>Subtract</button> : <h3>Item deleted</h3>}
                   </div>
                   <h2>Subtotal: {total} </h2>
                 </div>
