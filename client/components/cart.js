@@ -39,7 +39,7 @@ export class Cart extends Component {
             return (
               <Grid.Column as='a' key={ product.id } >
                 <div>
-                  <h3>{ product.title }</h3>
+                  <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
                   <Image src={ product.imgUrl } />
                   <div>
                     <h5 color="green">{ product.showPrice }</h5>
@@ -47,15 +47,17 @@ export class Cart extends Component {
                     <button onClick={() => handleAdd(product.id)}>Add</button>
                     <button onClick={() => handleSubtract(product.id)}>Subtract</button>
                   </div>
-                  <h2>Subtotal: {total} </h2>
                 </div>
               </Grid.Column>
             )
           })
+
         }
+
         </Grid>
       : <h4>There are no products in the Cart!</h4> //display this message if database is empty
       }
+      <h2><center>Subtotal: ${total} </center></h2>
       </div>
     )
   }
