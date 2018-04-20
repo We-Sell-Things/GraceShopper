@@ -13,7 +13,6 @@ export class Cart extends Component {
 
   render() {
     const productsInCart = [];
-    console.log("props: ", this.props);
     const productIds = Object.keys(this.props.cart);
     const { handleSubtract } = this.props;
     const { handleAdd } = this.props;
