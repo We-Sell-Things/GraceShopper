@@ -3,11 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Products} from './components'
-<<<<<<< HEAD
-import {me, fetchProducts, fetchCategories} from './store'
-=======
-import {me, fetchProducts, fetchSingleCart} from './store'
->>>>>>> master
+import {me, fetchProducts, fetchCategories, fetchSingleCart} from './store'
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/cart'
 /**
