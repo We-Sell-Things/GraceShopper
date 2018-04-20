@@ -2,26 +2,30 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import {fetchSingleCart} from '../store/cart'
+import {fetchSingleCart, deleteFromCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 import { postToCart } from '../store'
 
 export class Cart extends Component {
 
+  // componentDidMount() {
+  //   this.props.loadCart()
+  // }
+
   render() {
     const productsInCart = [];
     console.log("props: ", this.props);
     const productIds = Object.keys(this.props.cart);
+    const { handleClick } = this.props;
 
     productIds.forEach(id => {
       this.props.products.filter(product => {
         if (+product.id === +id) {
+          product.quantity = this.props.cart[id]
           productsInCart.push(product)
         }
       })
     })
-
-    console.log('Products in cart', productsInCart)
 
     return (
       <div>
@@ -37,6 +41,8 @@ export class Cart extends Component {
                   <Image src={ product.imgUrl } />
                   <div>
                     <h5 color="green">{ product.showPrice }</h5>
+                    <h5>Quantity: {product.quantity}</h5>
+                    <button onClick={() => handleClick(product.id)}>Remove from shopping cart</button>
                   </div>
                 </div>
               </Grid.Column>
@@ -52,12 +58,14 @@ export class Cart extends Component {
 }
 
 
-const mapDispatch = (dispatch, ownProps) => (
+const mapDispatch = (dispatch) => (
   {
-    // fetchData: () => {
-    //   console.log('hi')
-    //   dispatch(fetchSingleCart());
-    // }
+  //   loadCart: () => {
+  //     fetchSingleCart()
+  //   },
+    handleClick: (id) => {
+      dispatch(deleteFromCart(id));
+    }
   }
 )
 

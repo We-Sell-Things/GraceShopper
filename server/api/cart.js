@@ -16,5 +16,9 @@ router.post('/', (req, res, next) => {
   res.json(req.session.cart);
 })
 
-
+router.put('/', (req, res, next) => {
+  const productId = req.body.productId;
+  req.session.cart[productId]--
+  res.json(req.session.cart);
+})
 // router.delete
