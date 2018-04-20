@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import {fetchSingleCart, deleteFromCart} from '../store/cart'
+import {deleteFromCart, postToCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
-import { postToCart } from '../store'
 
 export class Cart extends Component {
 
@@ -16,7 +15,8 @@ export class Cart extends Component {
     const productsInCart = [];
     console.log("props: ", this.props);
     const productIds = Object.keys(this.props.cart);
-    const { handleClick } = this.props;
+    const { handleSubtract } = this.props;
+    const { handleAdd } = this.props;
 
     productIds.forEach(id => {
       this.props.products.filter(product => {
@@ -42,7 +42,8 @@ export class Cart extends Component {
                   <div>
                     <h5 color="green">{ product.showPrice }</h5>
                     <h5>Quantity: {product.quantity}</h5>
-                    <button onClick={() => handleClick(product.id)}>Remove from shopping cart</button>
+                    <button onClick={() => handleAdd(product.id)}>Add</button>
+                    <button onClick={() => handleSubtract(product.id)}>Subtract</button>
                   </div>
                 </div>
               </Grid.Column>
@@ -60,11 +61,11 @@ export class Cart extends Component {
 
 const mapDispatch = (dispatch) => (
   {
-  //   loadCart: () => {
-  //     fetchSingleCart()
-  //   },
-    handleClick: (id) => {
+    handleSubtract: (id) => {
       dispatch(deleteFromCart(id));
+    },
+    handleAdd: (id) => {
+      dispatch(postToCart(id));
     }
   }
 )
