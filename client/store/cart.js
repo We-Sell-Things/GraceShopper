@@ -12,9 +12,9 @@ const getCart = cart => ({
   cart
 });
 
-const addToCart = product => ({
+const addToCart = cart => ({
   type: ADD_TO_CART,
-  product
+  cart
 });
 
 const removeFromCart = cart => ({
@@ -36,8 +36,8 @@ export const fetchSingleCart = () => dispatch =>
 export const postToCart = (productId) => dispatch =>
   axios.post('/api/cart/', {productId})
   .then(res => res.data)
-  .then(productIds => {
-    const action = addToCart(productIds)
+  .then(updatedCart => {
+    const action = addToCart(updatedCart)
     dispatch(action);
   })
   .catch(err => console.log(err));
@@ -60,9 +60,8 @@ export default function(state = defaultCart, action){
     case GET_CART:
       return action.cart;
     case ADD_TO_CART:
-      return [...state, action.product];
+      return action.cart;
     case REMOVE_FROM_CART:
-    console.log('ACTION DELETE CART', action)
     return action.cart;
     default: return state;
   }
