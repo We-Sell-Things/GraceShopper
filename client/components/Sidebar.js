@@ -1,29 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { Grid, Image, Icon, Button, Container, Sidebar, Menu, Header } from 'semantic-ui-react';
+import { Sidebar, Menu, Header, Grid } from 'semantic-ui-react';
 import {NavLink} from 'react-router-dom';
 
-const Categories = ({categories}) => {
+const AppSidebar = ({categories}) => {
   return (
-    <div>
-     {
-       categories.length ?
-       <Sidebar as={Menu} width='thin' visible='visible' vertical inverted>
-       <Header as='h3' style={{color: 'white'}}>Categories</Header>
-        {
+    <div style={{width: '10vw', float: 'left', margin: '1vw', height: '100vh'}}>
+    <Grid columns={1}>
+      <Header as='h3'>Categories</Header>
+      {
+        categories.length ?
           categories.map(category => {
             return (
-              <Menu.Item key={category.id}>
+              <Grid.Column key={category.id}>
                 <NavLink to={`/categories/${category.id}`}>
                 <h3>{category.name}</h3></NavLink>
-              </Menu.Item>
+              </Grid.Column>
             )
           })
-        }
-       </Sidebar>
       : <h4>There are no categories in the database!</h4>
-     }
+      }
+    </Grid>
     </div>
   )
 }
@@ -37,11 +35,11 @@ const mapState = state => {
   }
 };
 
-export default connect(mapState)(Categories);
+export default connect(mapState)(AppSidebar);
 
 /**
  * PROP TYPES
  */
-Categories.propTypes = {
+AppSidebar.propTypes = {
   categories: PropTypes.array.isRequired
 }
