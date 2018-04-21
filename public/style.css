@@ -32,3 +32,13 @@ img {
   border-style: none;
   width: 500px;
 }
+
+.ui.menu {
+  font-size: 1.5rem;
+  background: lightgrey;
+}
+
+.ui[class*="three column"].grid>.column:not(.row), .ui[class*="three column"].grid>.row>.column {
+  width: 33.33333333%;
+  box-shadow: 2px 2px 2px 0px rgba(34,36,38,.15);
+}

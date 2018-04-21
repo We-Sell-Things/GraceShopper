@@ -44,14 +44,45 @@ export class Checkout extends Component {
                       <h5 color="green">{product.showPrice}</h5>
                       <h5>Quantity: {product.quantity}</h5>
                     </div>
-                    <h2>Subtotal: {total} </h2>
                   </div>
                 </ul>
               )
             })
           }
-
-        }
+          <h2>Subtotal: {total} </h2>
+          <form>
+          <h3>Contact Info: </h3>
+  <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
+  <label>
+    Email Address:
+    <input type="text" name="email" />
+  </label>
+  <h3>Address: </h3>
+  <label>
+    Line 1:
+    <input type="text" name="shippingaddress" />
+  </label>
+  <label>
+    City
+    <input type="text" name="city" />
+  </label>
+  <label>
+    State: (Initials ie. 'NY')
+    <input type="text" name="state" />
+  </label>
+  <label>
+    Country: (Initials ie. 'US')
+    <input type="text" name="country" />
+  </label>
+  <label>
+    Postal Code:
+    <input type="text" name="code" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
       </div>
     )
   }
