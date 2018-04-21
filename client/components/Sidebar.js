@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { Sidebar, Menu, Header, Grid } from 'semantic-ui-react';
+import { Header, Grid } from 'semantic-ui-react';
 import {NavLink} from 'react-router-dom';
+import { fetchSingleCategory } from '../store';
 
-const AppSidebar = ({categories}) => {
+const AppSidebar = ({categories, handleCategory}) => {
   return (
     <div style={{width: '10vw', float: 'left', margin: '1vw', height: '100vh'}}>
     <Grid columns={1}>
@@ -15,7 +16,7 @@ const AppSidebar = ({categories}) => {
             return (
               <Grid.Column key={category.id}>
                 <NavLink to={`/categories/${category.id}`}>
-                <h3>{category.name}</h3></NavLink>
+                <h3 onClick={() => handleCategory(category.id)}>{category.name}</h3></NavLink>
               </Grid.Column>
             )
           })
@@ -35,7 +36,15 @@ const mapState = state => {
   }
 };
 
-export default connect(mapState)(AppSidebar);
+const mapDispatch = dispatch => {
+  return {
+    handleCategory: function(categoryId){
+      dispatch(fetchSingleCategory(categoryId));
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(AppSidebar);
 
 /**
  * PROP TYPES
