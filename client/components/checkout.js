@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
-import {deleteFromCart, postToCart} from '../store/cart'
-import {Grid, Image, Icon} from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { deleteFromCart, postToCart } from '../store/cart'
+import { Grid, Image, Icon } from 'semantic-ui-react'
 
 export class Checkout extends Component {
 
@@ -31,31 +31,27 @@ export class Checkout extends Component {
 
     return (
       <div>
-      { productsInCart.length
-      ? <Grid centered columns={3} style={{margin: '30px'}}>
-        { //if products has length, start the map
-          // map over each product in store creating a div box
-          productsInCart.map(product => {
-            return (
-              <Grid.Column as='a' key={ product.id } >
-                <div>
-                  <h3>{ product.title }</h3>
-                  <Image src={ product.imgUrl } />
+        <h1>Check Out</h1>
+
+          { //if products has length, start the map
+            // map over each product in store creating a div box
+            productsInCart.map(product => {
+              return (
+                <ul key={product.id} >
                   <div>
-                    <h5 color="green">{ product.showPrice }</h5>
-                    <h5>Quantity: {product.quantity}</h5>
-                    <button onClick={() => handleAdd(product.id)}>Add</button>
-                    <button onClick={() => handleSubtract(product.id)}>Subtract</button>
+                    <h3>{product.title}</h3>
+                    <div>
+                      <h5 color="green">{product.showPrice}</h5>
+                      <h5>Quantity: {product.quantity}</h5>
+                    </div>
+                    <h2>Subtotal: {total} </h2>
                   </div>
-                  <h2>Subtotal: {total} </h2>
-                </div>
-              </Grid.Column>
-            )
-          })
+                </ul>
+              )
+            })
+          }
+
         }
-        </Grid>
-      : <h4>There are no products in the Cart!</h4> //display this message if database is empty
-      }
       </div>
     )
   }
