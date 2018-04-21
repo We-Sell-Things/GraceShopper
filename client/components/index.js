@@ -8,3 +8,5 @@ export {default as UserHome} from './user-home'
 export {default as Products} from './products'
 export {Login, Signup} from './auth-form'
 export {default as Sidebar } from './sidebar'
+export {default as Checkout} from './checkout'
+

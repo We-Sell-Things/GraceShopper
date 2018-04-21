@@ -5,7 +5,8 @@ import {NavLink} from 'react-router-dom'
 import {deleteFromCart, postToCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 
-export class Cart extends Component {
+export class Checkout extends Component {
+
 
 
   render() {
@@ -27,6 +28,7 @@ export class Cart extends Component {
     })
 
 
+
     return (
       <div>
       { productsInCart.length
@@ -35,30 +37,25 @@ export class Cart extends Component {
           // map over each product in store creating a div box
           productsInCart.map(product => {
             return (
-              <Grid.Column as="a" key={ product.id } >
+              <Grid.Column as='a' key={ product.id } >
                 <div>
-                  <h3><a href={`/products/${product.id}`}>{ product.title }</a></h3>
+                  <h3>{ product.title }</h3>
                   <Image src={ product.imgUrl } />
                   <div>
                     <h5 color="green">{ product.showPrice }</h5>
                     <h5>Quantity: {product.quantity}</h5>
                     <button onClick={() => handleAdd(product.id)}>Add</button>
-                    { product.quantity > 0 ? <button onClick={() => handleSubtract(product.id)}>Subtract</button> : <h3>Item deleted</h3>}
+                    <button onClick={() => handleSubtract(product.id)}>Subtract</button>
                   </div>
                   <h2>Subtotal: {total} </h2>
-
-                  <h3><b href={'/cart/checkout'}>Checkout</b></h3>
                 </div>
               </Grid.Column>
             )
           })
-
         }
-
         </Grid>
       : <h4>There are no products in the Cart!</h4> //display this message if database is empty
       }
-      <h2><center>Subtotal: ${total} </center></h2>
       </div>
     )
   }
@@ -83,4 +80,4 @@ const mapState = function (state) {
   }
 }
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapState, mapDispatch)(Checkout);
