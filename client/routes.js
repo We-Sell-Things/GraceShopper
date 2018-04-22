@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Products} from './components'
-import {me, fetchProducts, fetchSingleCart} from './store'
+import {me, fetchProducts, fetchSingleCart, fetchCategories} from './store'
+import {Login, Signup, UserHome, Products, Checkout} from './components'
 import SingleProduct from './components/SingleProduct';
+import SingleCategory from './components/SingleCategory';
 import Cart from './components/cart'
 /**
  * COMPONENT
@@ -25,7 +26,9 @@ class Routes extends Component {
         <Route exact path="/products" component={ Products } />
         <Route exact path="/shoppingCart" component={ Cart } />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path="/categories/:categoryId" component={SingleCategory} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/cart/checkout" component={Checkout} />
         {
           isLoggedIn &&
             <Switch>
@@ -56,6 +59,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(fetchProducts())
+      dispatch(fetchCategories())
       dispatch(fetchSingleCart())
     }
   }

@@ -18,7 +18,17 @@ router.post('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
   const productId = req.body.productId;
-  req.session.cart[productId]--
+  if (req.session.cart[productId] > 1){
+    req.session.cart[productId]--;
+    res.json(req.session.cart);
+  } else {
+    delete req.session.cart[productId];
+    res.json(req.session.cart);
+  }
+})
+
+
+router.get('/cart', (req, res, next) => {
   res.json(req.session.cart);
 })
 // router.delete

@@ -21,7 +21,6 @@ export class FilterSearchBar extends Component {
     this.props.products.map(product =>
       options.push({ text: product.title, key: product.id })
     )
-    console.log(options)
     return (
       <div>
 

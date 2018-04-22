@@ -7,7 +7,7 @@ import { postToCart } from '../store'
 
 const Products = ({ products, handleAdd }) => {
   return (
-    <div>
+    <div style={{marginLeft: '10vw'}}>
     { products.length
     ? <Grid columns={3} style={{margin: '30px'}}>
       { //if products has length, start the map
