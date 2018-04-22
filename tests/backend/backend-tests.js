@@ -1,6 +1,7 @@
 import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
+const Category = db.model('category');
 import app from '../../server';
 
 // import fsMisc from 'fs-misc';
@@ -13,6 +14,8 @@ const expect = chai.expect;
 import supertest from 'supertest-as-promised';
 import sinon from 'sinon';
 
+require('../../server/api/users')
+
 describe('▒▒▒ Backend tests ▒▒▒', () => {
 
     beforeEach('Synchronize and clear database', () => db.sync({force: true}));
@@ -21,6 +24,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
     describe('Sequelize models', function () {
 
+      // testing user model
         describe('User Model', () => {
 
             // *Assertion translation*:
@@ -52,6 +56,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
         });
 
+        //testing product model
         describe('Product Model', () => {
 
             describe('definition', () => {
@@ -150,8 +155,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
                 describe('getter method', () => {
 
-                    // Be sure to read the large comment in server/models/index.js
-                    // before attempting the following assertions.
                     describe('showPrice', () => {
 
                         let products;
@@ -174,6 +177,33 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
         });
 
+        // testing category model
+        describe('Category Model', () => {
+
+          // *Assertion translation*:
+          // This assertion expects that the Category model will
+          describe('validations', () => {
+
+              // *Assertion translation*:
+              // The `name` column should be a required field.
+              it('require name', () => {
+                  const category = Category.build();
+                  return category.validate()
+                      .then(() => { throw new Error('Promise should have rejected');})
+                      .catch(err => {
+                          expect(err).to.exist;
+                          expect(err).to.be.an('error');
+                          expect(err.errors).to.contain.a.thing.with.properties({
+                              path: 'name',
+                              type: 'notNull Violation'
+                          });
+                      });
+              });
+
+          });
+
+      });
+
     });
 
     describe('HTTP Server', () => {
@@ -183,170 +213,119 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
             agent = supertest(app);
         });
 
-//         describe('api routes', () => {
+        describe('api routes', () => {
 
-//             let obama;
-//             let biden;
-//             beforeEach('Seed users', () => {
-//                 const users = [
-//                     {email: 'obama@gmail.com'},
-//                     {email: 'biden@gmail.com'}
-//                 ];
-//                 return User.bulkCreate(users, {returning: true})
-//                     .then(createdUsers => {
-//                         obama = createdUsers[0].id;
-//                         biden = createdUsers[1].id;
-//                     });
-//             });
-
-//             let obamaFirstMessage;
-//             let bidenFirstMessage;
-//             let obamaSecondMessage;
-//             beforeEach('Seed messages', () => {
-
-//                 const messages = [
-//                     {
-//                         toId: biden,
-//                         fromId: obama,
-//                         body: 'HEYOOOOOOO'
-//                     },
-//                     {
-//                         toId: obama,
-//                         fromId: biden,
-//                         body: 'WAAASSUUUUPP??'
-//                     },
-//                     {
-//                         toId: biden,
-//                         fromId: obama,
-//                         body: 'nmu?'
-//                     }
-//                 ];
-
-//                 return Message.bulkCreate(messages, {returning: true})
-//                     .then(createdMessages => {
-//                         obamaFirstMessage = createdMessages[0].id;
-//                         bidenFirstMessage = createdMessages[1].id;
-//                         obamaSecondMessage = createdMessages[2].id;
-//                     });
-
-//             });
-
-//             describe('users', () => {
-
-//                 it('serves up all users on request to GET /', () => {
-//                     return agent
-//                         .get('/users')
-//                         .expect(200)
-//                         .then(res => {
-//                             expect(res.body).to.be.an('array');
-//                             expect(res.body.length).to.be.equal(2);
-//                             expect(res.body).to.contain.a.thing.with('id', obama);
-//                             expect(res.body).to.contain.a.thing.with('id', biden);
-//                         });
-//                 });
-
-//                 it('updates a user at PUT /{{usersId}}, sending a 201 response', () => {
-//                     return agent
-//                         .put(`/users/${obama}`)
-//                         .send({
-//                             email: 'potus@hotmail.com'
-//                         })
-//                         .expect(201)
-//                         .then(res => {
-//                             return User.findById(obama);
-//                         })
-//                         .then(user => {
-//                             expect(user.email).to.be.equal('potus@hotmail.com');
-//                         });
-//                 });
-
-//             });
-
-//             describe('messages', () => {
-
-//                 it('serves up all messages to a specific user on GET /to/{{recipientId}}', () => {
-//                     return agent
-//                         .get(`/messages/to/${obama}`)
-//                         .expect(200)
-//                         .then(res => {
-//                             expect(res.body).to.be.an('array');
-//                             expect(res.body.length).to.be.equal(1);
-//                             expect(res.body[0].body).to.be.equal('WAAASSUUUUPP??');
-//                         });
-//                 });
-
-//                 it('serves up all messages from a specific sender on GET /from/{{senderId}}', () => {
-//                     return agent
-//                         .get(`/messages/from/${obama}`)
-//                         .expect(200)
-//                         .then(res => {
-//                             expect(res.body).to.be.an('array');
-//                             expect(res.body.length).to.be.equal(2);
-//                             expect(res.body).to.contain.a.thing.with.property('body', 'HEYOOOOOOO');
-//                             expect(res.body).to.contain.a.thing.with.property('body', 'nmu?');
-//                         });
-//                 });
+            let fooId;
+            let barId;
+            beforeEach('Seed users', () => {
+                const users = [
+                  {email: 'foo@gmail.com'},
+                  {email: 'bar@gmail.com'}
+                ];
 
 
-//                 it('serves up all messages—WITH FILLED IN REFERENCES—to a specific user on GET /to/{{recipientId}}', () => {
-//                     return agent
-//                         .get(`/messages/to/${obama}`)
-//                         .expect(200)
-//                         .then(res => {
-//                             expect(res.body).to.be.an('array');
-//                             expect(res.body.length).to.be.equal(1);
-//                             expect(res.body[0].from.email).to.be.equal('biden@gmail.com');
-//                             expect(res.body[0].to.email).to.be.equal('obama@gmail.com');
-//                         });
-//                 });
+                return User.bulkCreate(users, {returning: true})
+                    .then(createdUsers => {
+                        fooId = createdUsers[0].id;
+                        barId = createdUsers[1].id;
+                    });
+            });
 
-//                 it(`serves up all messages from a specific sender on GET /from/{{senderId}}
-//                     and uses the Message model static getAllWhereSender in the process`, () => {
 
-//                     // http://sinonjs.org/docs/#spies
-//                     const getAllWhereSenderSpy = sinon.spy(Message, 'getAllWhereSender');
+            let candle;
+            let tumbler;
+            let kleenex;
+            beforeEach('Seed products', () => {
 
-//                     return agent
-//                         .get(`/messages/from/${obama}`)
-//                         .expect(200)
-//                         .then(res => {
+                const products = [
+                    {
+                        title: 'candle',
+                        description: 'to make your room aromatic',
+                        price: '200'
+                    },
+                    {
+                        title: 'tumbler',
+                        description: 'to carry coffee',
+                        price: '99'
+                    },
+                    {
+                        title: 'kleenex',
+                        description: 'tissue in a box',
+                        price: '5'
+                    }
+                ];
 
-//                             expect(res.body).to.be.an('array');
-//                             expect(res.body.length).to.be.equal(2);
+                return Product.bulkCreate(products, {returning: true})
+                    .then(createdProducts => {
+                        candle = createdProducts[0].id;
+                        tumbler = createdProducts[1].id;
+                        kleenex = createdProducts[2].id;
+                    });
 
-//                             expect(getAllWhereSenderSpy.called).to.be.equal(true);
-//                             expect(getAllWhereSenderSpy.calledWith(obama.toString())).to.be.equal(true);
+            });
 
-//                             getAllWhereSenderSpy.restore();
+            let fragrance;
+            let somethingElse;
+            beforeEach('Seed categories', () => {
+                const categories = [
+                  {name: 'fragrance'},
+                  {name: 'somethingElse'}
+                ];
 
-//                         });
 
-//                 });
+                return Category.bulkCreate(categories, {returning: true})
+                    .then(createdCategories => {
+                        fragrance = createdCategories[0].id;
+                        somethingElse = createdCategories[1].id;
+                    });
+            });
 
-//                 it('adds a new message on POST /, responding with 201 and created message', () => {
+            describe('users', () => {
 
-//                     return agent
-//                         .post('/messages')
-//                         .send({
-//                             fromId: biden,
-//                             toId: obama,
-//                             body: 'You are my best friend. I hope you know that.'
-//                         })
-//                         .expect(201)
-//                         .then(res => {
-//                             const createdMessage = res.body;
-//                             return Message.findById(createdMessage.id)
-//                         })
-//                         .then(foundMessage => {
-//                             expect(foundMessage.body).to.be.equal('You are my best friend. I hope you know that.');
-//                         });
+                it('serves up all users on request to GET /', () => {
+                    return agent
+                        .get('/api/users')
+                        .expect(200)
+                        .then(res => {
+                            expect(res.body).to.be.an('array');
+                            expect(res.body.length).to.be.equal(2);
+                            expect(res.body)
+                        });
+                });
 
-//                 });
+            });
 
-//             });
+            describe('products', () => {
 
-//         });
+              it('serves up all products on request to GET /', () => {
+                  return agent
+                      .get('/api/products')
+                      .expect(200)
+                      .then(res => {
+                          expect(res.body).to.be.an('array');
+                          expect(res.body.length).to.be.equal(3);
+                          expect(res.body)
+                      });
+              });
 
-//     });
+            });
+
+            describe('categories', () => {
+
+              it('serves up all categories on request to GET /', () => {
+                  return agent
+                      .get('/api/categories')
+                      .expect(200)
+                      .then(res => {
+                          expect(res.body).to.be.an('array');
+                          expect(res.body.length).to.be.equal(2);
+                      });
+              });
+
+            });
+
+        });
+
+    });
 
 });
