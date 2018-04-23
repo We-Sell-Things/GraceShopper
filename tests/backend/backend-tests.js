@@ -209,7 +209,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
       });
 
-<<<<<<< HEAD
       describe('Order Model', () => {
         describe('definition', () => {
           // *Assertion translation*:
@@ -279,7 +278,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
           });
         });
       })
-=======
       // testing review model
       describe('Review Model', () => {
 
@@ -306,7 +304,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
         });
 
       });
->>>>>>> master
 
     });
 
