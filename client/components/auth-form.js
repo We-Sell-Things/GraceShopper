@@ -29,8 +29,8 @@ const AuthForm = (props) => {
       <Button color='google plus' href="/auth/google" >
         <Icon name='google' /> {displayName} with Google
       </Button>
-      <Button color='google plus' href="/auth/github" >
-        <Icon name='google' /> {displayName} with GitHub
+      <Button color='blue' href="/auth/github" >
+        <Icon name='github' /> {displayName} with GitHub
       </Button>
     </div>
   )
