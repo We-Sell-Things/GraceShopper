@@ -36,5 +36,6 @@ module.exports = {
   Product,
   Cart,
   Category,
+  Order,
   Review
 }
