@@ -11,7 +11,6 @@ const Category = require('./category');
  */
 
 Cart.belongsTo(User);
-Cart.hasMany(Product);
 Product.belongsTo(Category);
 Category.hasMany(Product, { onDelete: 'cascade', hooks: true });
 
