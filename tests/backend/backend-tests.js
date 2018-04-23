@@ -2,6 +2,7 @@ import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
 const Category = db.model('category');
+const Review = db.model('review');
 import app from '../../server';
 
 // import fsMisc from 'fs-misc';
@@ -201,6 +202,33 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
               });
 
           });
+
+      });
+
+      // testing review model
+      describe('Review Model', () => {
+
+        // *Assertion translation*:
+        // This assertion expects that the Category model will
+        describe('validations', () => {
+
+            // *Assertion translation*:
+            // The `name` column should be a required field.
+            it('require review', () => {
+                const review = Review.build();
+                return review.validate()
+                    .then(() => { throw new Error('Promise should have rejected');})
+                    .catch(err => {
+                        expect(err).to.exist;
+                        expect(err).to.be.an('error');
+                        expect(err.errors).to.contain.a.thing.with.properties({
+                            path: 'review',
+                            type: 'notNull Violation'
+                        });
+                    });
+            });
+
+        });
 
       });
 
