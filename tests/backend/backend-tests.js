@@ -2,11 +2,8 @@ import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
 const Category = db.model('category');
-<<<<<<< HEAD
 const Order = db.model('order');
-=======
 const Review = db.model('review');
->>>>>>> master
 import app from '../../server';
 
 // import fsMisc from 'fs-misc';
@@ -173,7 +170,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
 
                         it('returns price with $ sign attached', () => {
-                            expect(products.showPrice).to.be.a("$10");
+                            expect(products.showPrice).to.be.a('$10');
                         });
                     })
                 });
@@ -209,7 +206,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
 
       });
 
-<<<<<<< HEAD
       describe('Order Model', () => {
         describe('definition', () => {
           // *Assertion translation*:
@@ -279,7 +275,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
           });
         });
       })
-=======
       // testing review model
       describe('Review Model', () => {
 
@@ -306,7 +301,6 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
         });
 
       });
->>>>>>> master
 
     });
 
@@ -408,6 +402,22 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                       .then(res => {
                           expect(res.body).to.be.an('array');
                           expect(res.body.length).to.be.equal(3);
+                          expect(res.body)
+                      });
+              });
+
+            });
+
+            describe('single product route', () => {
+
+              it('serves up a specific product on request to GET /:id', () => {
+                  return agent
+                      .get('/api/products/1')
+                      .expect(200)
+                      .then(res => {
+                          expect(res.body).to.be.an('object');
+                          expect(res.body.title).to.be.equal('candle');
+                          expect(res.body.showPrice).to.be.equal('$200');
                           expect(res.body)
                       });
               });
