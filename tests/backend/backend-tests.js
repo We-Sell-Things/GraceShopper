@@ -2,6 +2,7 @@ import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
 const Category = db.model('category');
+const Order = db.model('order');
 import app from '../../server';
 
 // import fsMisc from 'fs-misc';
@@ -203,6 +204,76 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
           });
 
       });
+
+      describe('Order Model', () => {
+        describe('definition', () => {
+          // *Assertion translation*:
+          // This assertion expects that the Order model will:
+
+          //put an `price` column in the orders table
+          it('has price column', () => {
+            expect(Order.attributes.price).to.be.an('object');
+          });
+
+          //put a `productId` column in the orders table
+          it('has productId column', () => {
+            expect(Order.attributes.productId).to.be.an('object');
+          });
+
+          //put a `quantity` column in the orders table
+          it('has quantity column', () => {
+            expect(Order.attributes.quantity).to.be.an('object');
+          });
+        });
+
+        describe('validations', () => {
+          it('requires a price', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'price',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+          it('requires a productId', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'productId',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+          it('requires a quantity', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'quantity',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+        });
+      })
 
     });
 
