@@ -2,6 +2,7 @@ const User = require('./user');
 const Product = require('./product');
 const Cart = require('./cart');
 const Category = require('./category');
+const Order = require('./order');
 const Review= require('./review');
 
 /**
@@ -16,6 +17,8 @@ Cart.hasMany(Product);
 
 Product.belongsTo(Category);
 Category.hasMany(Product, { onDelete: 'cascade', hooks: true });
+Order.belongsTo(User);
+User.hasMany(Order);
 
 // Review Associations
 Review.belongsTo(User);
