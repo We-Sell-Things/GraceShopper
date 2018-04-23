@@ -13,6 +13,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       {isLoggedIn ? (
         <Menu.Menu position='right'>
           {/* The navbar will show these links after you log in */}
+          {/* <Menu.Item as={Link} to="<front-end-route>">Home</Menu.Item> */}
           <Menu.Item as='a' href="/home">Home</Menu.Item>
           <Menu.Item as='a' href="#" onClick={handleClick}>Logout</Menu.Item>
           <Menu.Item as='a' href="/cart"><Icon name="shop" /></Menu.Item>
@@ -44,6 +45,10 @@ const mapDispatch = dispatch => {
     }
   }
 }
+
+// const mapDispatch = {
+//   logout
+// }
 
 export default connect(mapState, mapDispatch)(Navbar)
 

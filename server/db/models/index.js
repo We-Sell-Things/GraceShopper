@@ -10,8 +10,10 @@ const Category = require('./category');
  *    BlogPost.belongsTo(User)
  */
 
+ // remove unused code
 Cart.belongsTo(User);
 Cart.hasMany(Product);
+
 Product.belongsTo(Category);
 Category.hasMany(Product, { onDelete: 'cascade', hooks: true });
 

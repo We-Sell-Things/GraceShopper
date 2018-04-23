@@ -6,6 +6,10 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 //forth when we want to remove cart all together
 
+// you could do the same thing with a "REPLACE_CART" action create - but this strategy is maybe not the most time and network efficient (could just sent back a success response from the backend and the front end can handle editing the cart)
+
+// you could make cart utility files that would be identically used on both front end and back end
+
 //action creators
 const getCart = cart => ({
   type: GET_CART,

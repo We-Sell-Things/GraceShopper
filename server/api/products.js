@@ -15,6 +15,7 @@ router.get('/', (req, res, next) => {
 //get a single product
 router.get('/:id', (req, res, next) => {
   //find by id and add eager loading
+  // try to be more specific, incase the product's associations get more complex
   Product.findById(req.params.id, { include: [{ all: true }]})
   .then(product => res.json(product))
   .catch(next);

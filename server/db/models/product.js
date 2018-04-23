@@ -15,6 +15,7 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     allowNull: false
   },
+  // price could probably have more validations (don't have negative pricing!)
   price: {
     type: Sequelize.INTEGER,
     allowNull: false

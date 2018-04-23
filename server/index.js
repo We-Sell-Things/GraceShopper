@@ -53,6 +53,8 @@ const createApp = () => {
   app.use(passport.session())
 
   // session middleware to create a cart
+
+  // simple, and in the right spot
   app.use((req, res, next) => {
     if (!req.session.cart) {
       req.session.cart = {}

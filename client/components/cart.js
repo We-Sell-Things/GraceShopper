@@ -5,6 +5,8 @@ import {NavLink, Link} from 'react-router-dom'
 import {deleteFromCart, postToCart} from '../store/cart'
 import {Grid, Image, Icon} from 'semantic-ui-react'
 
+// if you're not using lifecycle methods or local state, you can use pure functional components
+
 export class Cart extends Component {
 
 
@@ -13,6 +15,8 @@ export class Cart extends Component {
     const productIds = Object.keys(this.props.cart);
     const { handleSubtract } = this.props;
     const { handleAdd } = this.props;
+
+    // { handleSubtract, handleAdd, products, cart} = this.props;
 
     let total = 0;
 
@@ -26,13 +30,15 @@ export class Cart extends Component {
       })
     })
 
-
+    // be mindful of your styling and indentation!
     return (
       <div>
       { productsInCart.length
       ? <div><Grid centered columns={3} style={{margin: '30px'}}>
         { //if products has length, start the map
           // map over each product in store creating a div box
+
+          // ES6 implicit returns in mappings - never need to "return" inside of a mapping (just use parens instead of curly braces and JS reads it as one line)
           productsInCart.map(product => {
             return (
               <Grid.Column as="a" key={ product.id } >
