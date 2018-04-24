@@ -15,6 +15,7 @@ chai.use(chaiThings);
 const expect = chai.expect;
 import supertest from 'supertest-as-promised';
 import sinon from 'sinon';
+import { request } from 'https';
 
 require('../../server/api/users')
 
@@ -415,9 +416,20 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                           expect(res.body.length).to.be.equal(2);
                       });
               });
-
             });
 
+            describe('orders', () => {
+
+              it('serves up all orders on request to GET /', () => {
+                return agent
+                    .get('/api/orders')
+                    .expect(401) //get 401 because unauthorized
+                    .then(res => {
+                        expect(res.body).to.be.an('object');
+                        expect(res.body.length).to.be.equal(undefined);
+                    });
+            });
+            })
         });
 
     });
