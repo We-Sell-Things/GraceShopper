@@ -13,6 +13,7 @@ const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Product} = require('../server/db/models')
 const {Category} = require('../server/db/models')
+const {Review} = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -32,6 +33,11 @@ async function seed () {
     Category.create({name: 'nonsense'}),
     Category.create({name: 'food'}),
     Category.create({name: 'goodies'})
+  ])
+
+  const reviews = await Promise.all([
+    Review.create({score: 4, review: 'it is tops', userId: 1}),
+    Review.create({score: 5, review: '10/10 would buy', userId: 2})
   ])
 
   const products = await Promise.all([
@@ -54,6 +60,7 @@ async function seed () {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${categories.length} categories`)
+  console.log(`seeded ${reviews.length} reviews`)
   console.log(`seeded successfully`)
 }
 
