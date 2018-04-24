@@ -2,6 +2,8 @@ import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
 const Category = db.model('category');
+const Order = db.model('order');
+const Review = db.model('review');
 import app from '../../server';
 
 // import fsMisc from 'fs-misc';
@@ -168,7 +170,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
 
                         it('returns price with $ sign attached', () => {
-                            expect(products.showPrice).to.be.a("$10");
+                            expect(products.showPrice).to.be.a('$10');
                         });
                     })
                 });
@@ -201,6 +203,102 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
               });
 
           });
+
+      });
+
+      describe('Order Model', () => {
+        describe('definition', () => {
+          // *Assertion translation*:
+          // This assertion expects that the Order model will:
+
+          //put an `price` column in the orders table
+          it('has price column', () => {
+            expect(Order.attributes.price).to.be.an('object');
+          });
+
+          //put a `productId` column in the orders table
+          it('has productId column', () => {
+            expect(Order.attributes.productId).to.be.an('object');
+          });
+
+          //put a `quantity` column in the orders table
+          it('has quantity column', () => {
+            expect(Order.attributes.quantity).to.be.an('object');
+          });
+        });
+
+        describe('validations', () => {
+          it('requires a price', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'price',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+          it('requires a productId', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'productId',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+          it('requires a quantity', () => {
+            const order = Order.build();
+            return order.validate()
+              .then(() => {
+                throw new Error ('Promise should have rejected');
+              })
+              .catch(err => {
+                expect(err).to.exist;
+                expect(err).to.be.an('error');
+                expect(err.errors).to.contain.a.thing.with.properties({
+                  path: 'quantity',
+                  type: 'notNull Violation'
+                })
+              });
+          });
+        });
+      })
+      // testing review model
+      describe('Review Model', () => {
+
+        // *Assertion translation*:
+        // This assertion expects that the Category model will
+        describe('validations', () => {
+
+            // *Assertion translation*:
+            // The `name` column should be a required field.
+            it('require review', () => {
+                const review = Review.build();
+                return review.validate()
+                    .then(() => { throw new Error('Promise should have rejected');})
+                    .catch(err => {
+                        expect(err).to.exist;
+                        expect(err).to.be.an('error');
+                        expect(err.errors).to.contain.a.thing.with.properties({
+                            path: 'review',
+                            type: 'notNull Violation'
+                        });
+                    });
+            });
+
+        });
 
       });
 
@@ -304,6 +402,22 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                       .then(res => {
                           expect(res.body).to.be.an('array');
                           expect(res.body.length).to.be.equal(3);
+                          expect(res.body)
+                      });
+              });
+
+            });
+
+            describe('single product route', () => {
+
+              it('serves up a specific product on request to GET /:id', () => {
+                  return agent
+                      .get('/api/products/1')
+                      .expect(200)
+                      .then(res => {
+                          expect(res.body).to.be.an('object');
+                          expect(res.body.title).to.be.equal('candle');
+                          expect(res.body.showPrice).to.be.equal('$200');
                           expect(res.body)
                       });
               });
