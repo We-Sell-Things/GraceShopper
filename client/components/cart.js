@@ -13,7 +13,6 @@ export class Cart extends Component {
     const productIds = Object.keys(this.props.cart);
     const { handleSubtract } = this.props;
     const { handleAdd } = this.props;
-
     let total = 0;
 
     productIds.forEach(id => {

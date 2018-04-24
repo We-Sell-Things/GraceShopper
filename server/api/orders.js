@@ -24,9 +24,17 @@ router.get('/', (req, res, next) => {
 //get a single order
 router.get('/:id', (req, res, next) => {
   //find by id and eager load User model
+  const passport = req.session.passport;
+  const passportExists = !!passport && !!Object.keys(passport).length;
+
+  if (passportExists) {
+
   Order.findById(req.params.id, { include: [User] })
     .then(order => res.json(order))
     .catch(next);
+  } else {
+    res.sendStatus(401);
+  }
 });
 
 //post an order
