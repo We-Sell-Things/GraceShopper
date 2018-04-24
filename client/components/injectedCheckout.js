@@ -16,8 +16,7 @@ class CheckoutForm extends React.Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name, email}).then((token) => {
-      console.log('Received Stripe token:', token);
+    this.props.stripe.createToken({name, email}).then(() => {
 
       const subtotal = this.props.total;
       const productIdAndQuantity = this.props.cart;
@@ -30,12 +29,9 @@ class CheckoutForm extends React.Component {
       .catch(err => console.log(err));
     });
 
-    // However, this line of code will do the same thing:
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
   }
 
   render() {
-    console.log('PROPS: ', this.props)
     return (
       <form onSubmit={this.handleSubmit} className="StripeElement">
       <label>
