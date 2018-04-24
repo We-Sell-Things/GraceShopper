@@ -1,18 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const Orders = ({order}) => {
-  console.log(order);
   return (
-    <ul>
+    <div>
+    <h1>Order History:</h1>
       {
         order.map(singleOrder => (
-          <li key={singleOrder.id}>{singleOrder.id}</li>
+          <Link to={`/orders/${singleOrder.id}`} key={singleOrder.id}>
+          <p>
+          <span>Order Number: {singleOrder.id} Total: ${singleOrder.subtotal}</span>
+          </p>
+          </Link>
         ))
       }
-    </ul>
+    </div>
   );
 }
 

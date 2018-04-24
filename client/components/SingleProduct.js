@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { postToCart } from '../store';
 import {fetchSingleProduct} from '../store/singleProduct';
 import {connect} from 'react-redux';
-import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react';
+import {Icon, Button } from 'semantic-ui-react';
 import Reviews from './Reviews';
 
 export class SingleProduct extends Component {
