@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { postToCart } from '../store';
 import {fetchSingleProduct} from '../store/singleProduct';
 import {connect} from 'react-redux';
-import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react'
+import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react';
+import Reviews from './Reviews';
 
 export class SingleProduct extends Component {
 
@@ -30,6 +31,8 @@ export class SingleProduct extends Component {
           </Button.Content>
         </Button>
         </div>
+        <h3>Reviews:</h3>
+        <Reviews reviews={product.reviews} />
       </div>
     )
   }
