@@ -5,7 +5,6 @@ import {NavLink} from 'react-router-dom'
 import { Card } from 'semantic-ui-react'
 
 const Reviews = ({ reviews }) => {
-  console.log('PROPS: ', reviews)
   return (
     <div>
       {
