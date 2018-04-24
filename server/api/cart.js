@@ -66,10 +66,8 @@ router.put('/', (req, res, next) => {
 
   if (req.session.cart[productId] > 1){
     req.session.cart[productId]--;
-    // res.json(req.session.cart);
   } else {
     delete req.session.cart[productId];
-    // res.json(req.session.cart);
   }
 
   // if logged in, post to the db
