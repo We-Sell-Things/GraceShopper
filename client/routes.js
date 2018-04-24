@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {me, fetchProducts, fetchSingleCart, fetchCategories} from './store'
+import {me, fetchProducts, fetchSingleCart, fetchCategories, fetchUserOrders} from './store'
 import {Login, Signup, UserHome, Products, Checkout} from './components'
 import SingleProduct from './components/SingleProduct';
 import SingleCategory from './components/SingleCategory';
@@ -64,6 +64,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchProducts())
       dispatch(fetchCategories())
       dispatch(fetchSingleCart())
+      dispatch(fetchUserOrders())
     }
   }
 }
