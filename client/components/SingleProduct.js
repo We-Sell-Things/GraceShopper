@@ -31,7 +31,7 @@ export class SingleProduct extends Component {
           </Button.Content>
         </Button>
         </div>
-        <h3>Reviews:</h3>
+        <h3>Reviews of this product:</h3>
         <Reviews reviews={product.reviews} />
       </div>
     )
