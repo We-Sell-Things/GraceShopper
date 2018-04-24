@@ -170,7 +170,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                         });
 
                         it('returns price with $ sign attached', () => {
-                            expect(products.showPrice).to.be.a('$10');
+                            expect(products.showPrice).to.be.equal('$10');
                         });
                     })
                 });
