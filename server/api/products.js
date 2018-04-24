@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Product} = require('../db/models');
+const { Product, Review } = require('../db/models');
 module.exports = router;
 
 //get all the products
@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
   .catch(next);
 });
 
-//get a single product
+//get a single product and it's associated reviews
 router.get('/:id', (req, res, next) => {
   //find by id and add eager loading
   Product.findById(req.params.id, { include: [{ all: true }]})
