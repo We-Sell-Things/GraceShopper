@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {injectStripe,
   CardNumberElement,
   CardExpiryElement,
@@ -15,12 +16,19 @@ class CheckoutForm extends React.Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name, email}).then((token) => {
-      console.log('Received Stripe token:', token);
+    this.props.stripe.createToken({name, email}).then(() => {
+
+      const subtotal = this.props.total;
+      const productIdAndQuantity = this.props.cart;
+
+      const order = {subtotal, productIdAndQuantity}
+
+      axios.post('/api/orders/', order)
+      .then(res => res.data)
+      .then(submittedOrder => console.log(submittedOrder))
+      .catch(err => console.log(err));
     });
 
-    // However, this line of code will do the same thing:
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
   }
 
   render() {

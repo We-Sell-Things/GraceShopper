@@ -10,29 +10,33 @@ export class FilterSearchBar extends Component {
     this.state = {
       inputValue: ''
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+
+  handleChange (evt) {
+    const value = evt.target.value;
+    console.log(value)
+    this.setState({
+      inputValue: value
+    });
+  }
+
 
   render() {
     const inputValue = this.state.inputValue;
     const filteredProducts = this.props.products.filter(product =>
       product.title.match(inputValue));
     const options = [];
-    const { handleSubmit } = this.props;
     this.props.products.map(product =>
       options.push({ text: product.title, key: product.id })
     )
     return (
       <div>
-
-
-        <Dropdown
-        className="searchbar"
-        placeholder="Select Product" fluid search
-        key={options}
-        selection options={options}
-          onLabelClick={handleSubmit}
-        />
-
+      <FilterInput
+      handleChange={this.handleChange}
+      inputValue={inputValue}
+    />
       </div>
     )
   }
@@ -48,7 +52,6 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit: (event => {
       event.preventDefault();
-      console.log('hi', event.target.value);
     })
   }
 }
