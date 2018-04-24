@@ -58,12 +58,35 @@ router.post('/', (req, res, next) => {
 })
 
 router.put('/', (req, res, next) => {
+  // check if passport exists. If it does, it means that the user is logged in
+  const passport = req.session.passport;
+  const passportExists = !!passport && !!Object.keys(passport).length;
+
   const productId = req.body.productId;
+
   if (req.session.cart[productId] > 1){
     req.session.cart[productId]--;
-    res.json(req.session.cart);
+    // res.json(req.session.cart);
   } else {
     delete req.session.cart[productId];
+    // res.json(req.session.cart);
+  }
+
+  // if logged in, post to the db
+  if (passportExists) {
+    const userId = passport.user;
+    Cart.findOrCreate({
+      where: {userId}
+    })
+    .spread(cart => {
+      cart.update({productIdAndQuantity: req.session.cart})
+      res.json(cart.productIdAndQuantity);
+    })
+    .catch(next);
+  }
+
+  // if not logged in, no interaction with db
+  else {
     res.json(req.session.cart);
   }
 })
