@@ -4,7 +4,7 @@ import axios from 'axios';
 const GET_ORDER = 'GET_ORDER';
 
 //action creator
-const getOrder = order => ({
+export const getOrder = order => ({
   type: GET_ORDER,
   order
 });
