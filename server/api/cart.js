@@ -7,21 +7,43 @@ router.get('/', (req, res, next) => {
   // check if passport exists. If it does, it means that the user is logged in
   const passport = req.session.passport;
   const passportExists = !!passport && !!Object.keys(passport).length;
+  const sessionCart = req.session.cart;
 
   // if not logged in, show the products that are stored in the session
   if (!passportExists) {
-    res.json(req.session.cart);
+    res.json(sessionCart);
   }
 
   // if logged in, show the products that are stored in the db
   else {
     const userId = passport.user;
-    Cart.findOne({
-      where: {
-        userId
-      }
+    Cart.findOrCreate({
+      where: {userId}
     })
-    .then(cart => res.json(cart.productIdAndQuantity))
+    .spread(cart => {
+
+      // if there were products in the user's cart, merge with the session cart
+      const dbCart = cart.productIdAndQuantity;
+
+      // if the products in sessionCart and dbCart do not match..
+      if (JSON.stringify(dbCart) !== JSON.stringify(sessionCart)){
+        // for every productId in dbCart
+        for (productId in dbCart) {
+          const quantity = dbCart[productId];
+          // check if the productId exists in the sessionCart, if so add the quantity to the existing quantity
+          if (sessionCart[productId]) {
+            sessionCart[productId] = sessionCart[productId] + quantity;
+          }
+          // else, create new key with productId and it's quantity
+          else {
+            sessionCart[productId] = quantity;
+          }
+        }
+      }
+      cart.update({productIdAndQuantity: sessionCart})
+      res.json(cart.productIdAndQuantity)
+    })
+    .catch(next);
   }
 })
 
