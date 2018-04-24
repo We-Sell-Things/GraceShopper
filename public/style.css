@@ -42,3 +42,15 @@ img {
   width: 33.33333333%;
   box-shadow: 2px 2px 2px 0px rgba(34,36,38,.15);
 }
+
+
+
+.StripeElement {
+  display: flow-root;
+  margin: 10px 0 20px 0;
+  max-width: 500px;
+  padding: 10px 0px;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border-radius: 4px;
+  background: white;
+}

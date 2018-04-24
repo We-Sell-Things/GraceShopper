@@ -1,4 +1,9 @@
 const router = require('express').Router()
+const keyPublishable = process.env.pk_test_bTipXCXlk32UsSY2G7SqOR5C;
+const keySecret = process.env.sk_test_Sm9PyHXOKGmJW0FWjUa3ievP;
+const stripe = require('stripe')(keySecret);
+
+
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -28,7 +33,7 @@ router.put('/', (req, res, next) => {
 })
 
 
-router.get('/cart', (req, res, next) => {
-  res.json(req.session.cart);
-})
-// router.delete
+
+
+
+

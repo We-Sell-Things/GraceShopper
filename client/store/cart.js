@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_CART = 'GET_CART';
 const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const CHECKOUT_CART = 'CHECKOUT_CART';
 //forth when we want to remove cart all together
 
 //action creators
@@ -21,6 +22,11 @@ const removeFromCart = cart => ({
   type: REMOVE_FROM_CART,
   cart
 });
+
+const checkoutcart = cart => ({
+  type: CHECKOUT_CART,
+  cart
+})
 
 //get single cart thunk
 export const fetchSingleCart = () => dispatch =>
@@ -52,6 +58,7 @@ export const deleteFromCart = (productId) => dispatch =>
   })
   .catch(err => console.log(err));
 
+
 //reducer
 const defaultCart = {};
 
@@ -64,5 +71,6 @@ export default function(state = defaultCart, action){
     case REMOVE_FROM_CART:
     return action.cart;
     default: return state;
+
   }
 }

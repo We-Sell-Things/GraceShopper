@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { deleteFromCart, postToCart } from '../store/cart'
+import { deleteFromCart, postToCart, checkout } from '../store/cart'
 import { Grid, Image, Icon } from 'semantic-ui-react'
+import {Elements} from 'react-stripe-elements';
+import InjectedCheckout from './injectedCheckout';
+
+
 
 export class Checkout extends Component {
 
@@ -12,8 +16,7 @@ export class Checkout extends Component {
   render() {
     const productsInCart = [];
     const productIds = Object.keys(this.props.cart);
-    const { handleSubtract } = this.props;
-    const { handleAdd } = this.props;
+    const { handleSubmit } = this.props;
 
     let total = 0;
 
@@ -31,58 +34,27 @@ export class Checkout extends Component {
 
     return (
       <div>
-        <h1>Check Out</h1>
-
-          { //if products has length, start the map
-            // map over each product in store creating a div box
-            productsInCart.map(product => {
-              return (
-                <ul key={product.id} >
-                  <div>
-                    <h3>{product.title}</h3>
-                    <div>
-                      <h5 color="green">{product.showPrice}</h5>
-                      <h5>Quantity: {product.quantity}</h5>
-                    </div>
-                  </div>
-                </ul>
-              )
-            })
-          }
-          <h2>Subtotal: {total} </h2>
-          <form>
-          <h3>Contact Info: </h3>
-  <label>
-    Name:
-    <input type="text" name="name" />
-  </label>
-  <label>
-    Email Address:
-    <input type="text" name="email" />
-  </label>
-  <h3>Address: </h3>
-  <label>
-    Line 1:
-    <input type="text" name="shippingaddress" />
-  </label>
-  <label>
-    City
-    <input type="text" name="city" />
-  </label>
-  <label>
-    State: (Initials ie. 'NY')
-    <input type="text" name="state" />
-  </label>
-  <label>
-    Country: (Initials ie. 'US')
-    <input type="text" name="country" />
-  </label>
-  <label>
-    Postal Code:
-    <input type="text" name="code" />
-  </label>
-  <input type="submit" value="Submit" />
-</form>
+      <h1>Check Out</h1>
+{ //if products has length, start the map
+  // map over each product in store creating a div box
+  productsInCart.map(product => {
+    return (
+      <ul key={product.id} >
+        <div>
+          <h3>{product.title}</h3>
+          <div>
+            <h5 color="green">{product.showPrice}</h5>
+            <h5>Quantity: {product.quantity}</h5>
+          </div>
+        </div>
+      </ul>
+    )
+  })
+}
+<h2>Subtotal: ${total} </h2>
+      <Elements>
+    <InjectedCheckout />
+      </Elements>
       </div>
     )
   }
@@ -91,11 +63,12 @@ export class Checkout extends Component {
 
 const mapDispatch = (dispatch) => (
   {
-    handleSubtract: (id) => {
-      dispatch(deleteFromCart(id));
-    },
-    handleAdd: (id) => {
-      dispatch(postToCart(id));
+    handleSubmit: (event) => {
+      event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const address = event.target.address.value;
+      dispatch(checkout({name, email, address}));
     }
   }
 )
