@@ -11,10 +11,9 @@ import productsComponent from '../../client/components/products';
 import { getProducts } from '../../client/store/products';
 import { getUser, removeUser } from '../../client/store/user';
 import { getCategories } from '../../client/store/categories';
+import { getOrder } from '../../client/store/singleOrder';
 import cartReducer, { getCart, addToCart, removeFromCart } from '../../client/store/cart';
 import { Cart } from '../../client/components/cart';
-
-
 
 describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
@@ -73,8 +72,6 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   })
 
-
-
   // CATEGORY REACT/REDUX
   describe('CATEGORY', () => {
 
@@ -98,6 +95,22 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   })
 
+  describe('ORDER', () => {
+    describe('Redux architecture', () => {
+      describe('Action Creators', () => {
+        it('creates getOrder action', () => {
+          const testOrder = {
+            subtotal: 135,
+            productIdAndQuantity: {'1': 3}
+          };
+          expect(getOrder(testOrder)).to.be.to.deep.equal({
+            type: 'GET_ORDER',
+            order: testOrder
+          })
+        })
+      })
+    })
+  })
 
 
   // CART REACT/REDUX
