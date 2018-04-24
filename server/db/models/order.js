@@ -3,20 +3,13 @@ const db = require('../db');
 
 //define a model
 const Order = db.define('order', {
-  price: {
+  subtotal: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  productId: {
-    type: Sequelize.INTEGER,
+  productIdAndQuantity: {
+    type: Sequelize.JSON,
     allowNull: false
-  },
-  quantity: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 1
-    }
   }
 });
 

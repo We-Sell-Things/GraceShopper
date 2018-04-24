@@ -9,7 +9,7 @@ const FilterInput = (props) => {
 
 
   return (
-    <form>
+    <form className="inputForm">
       <input
         onChange={handleChange}
         value={inputValue}

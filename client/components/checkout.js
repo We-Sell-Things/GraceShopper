@@ -3,20 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { deleteFromCart, postToCart, checkout } from '../store/cart'
-import { Grid, Image, Icon } from 'semantic-ui-react'
 import {Elements} from 'react-stripe-elements';
 import InjectedCheckout from './injectedCheckout';
 
 
 
 export class Checkout extends Component {
-
-
-
   render() {
     const productsInCart = [];
     const productIds = Object.keys(this.props.cart);
-    const { handleSubmit } = this.props;
 
     let total = 0;
 
@@ -53,7 +48,7 @@ export class Checkout extends Component {
 }
 <h2>Subtotal: ${total} </h2>
       <Elements>
-    <InjectedCheckout />
+    <InjectedCheckout total={total} cart={this.props.cart} />
       </Elements>
       </div>
     )
@@ -61,17 +56,7 @@ export class Checkout extends Component {
 }
 
 
-const mapDispatch = (dispatch) => (
-  {
-    handleSubmit: (event) => {
-      event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const address = event.target.address.value;
-      dispatch(checkout({name, email, address}));
-    }
-  }
-)
+
 
 const mapState = function (state) {
   return {
@@ -80,4 +65,4 @@ const mapState = function (state) {
   }
 }
 
-export default connect(mapState, mapDispatch)(Checkout);
+export default connect(mapState, null)(Checkout);
