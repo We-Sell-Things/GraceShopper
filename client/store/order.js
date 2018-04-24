@@ -20,9 +20,9 @@ export const fetchUserOrders = () => dispatch =>
   .catch(err => console.log(err));
 
 //reducer
-const defaultState = {};
+const orders = [];
 
-export default function (state = defaultState, action) {
+export default function (state = orders, action) {
   switch (action.type) {
     case GET_ORDERS:
       return action.orders;
