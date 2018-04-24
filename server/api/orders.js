@@ -4,9 +4,21 @@ module.exports = router;
 
 //get all the orders
 router.get('/', (req, res, next) => {
-  Order.findAll()
+  const passport = req.session.passport;
+  const passportExists = !!passport && !!Object.keys(passport).length;
+
+  if (passportExists) {
+    const userId = passport.user;
+    Order.findAll({
+      where: {
+        userId
+      }
+    })
     .then(orders => res.json(orders))
     .catch(next);
+  } else {
+    res.sendStatus(401);
+  }
 });
 
 //get a single order
