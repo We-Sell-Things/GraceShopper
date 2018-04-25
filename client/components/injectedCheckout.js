@@ -6,6 +6,7 @@ import {injectStripe,
   CardCVCElement,
   PostalCodeElement} from 'react-stripe-elements';
 
+
 class CheckoutForm extends React.Component {
   handleSubmit = (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
@@ -16,19 +17,17 @@ class CheckoutForm extends React.Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name, email}).then(() => {
-
+    this.props.stripe.createToken({name, email}).then((result) => {
       const subtotal = this.props.total;
       const productIdAndQuantity = this.props.cart;
+      const order = {subtotal, productIdAndQuantity, result}
 
-      const order = {subtotal, productIdAndQuantity}
 
       axios.post('/api/orders/', order)
       .then(res => res.data)
       .then(submittedOrder => console.log(submittedOrder))
       .catch(err => console.log(err));
     });
-
   }
 
   render() {
