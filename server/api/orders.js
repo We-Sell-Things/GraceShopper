@@ -34,7 +34,13 @@ router.get('/:id', (req, res, next) => {
   if (passportExists) {
 
   Order.findById(req.params.id, { include: [User] })
-    .then(order => res.json(order))
+    .then(order => {
+      if (req.user.id === order.userId) {
+        res.json(order)
+      } else {
+        res.sendStatus(401);
+      }
+    })
     .catch(next);
   } else {
     res.sendStatus(401);
