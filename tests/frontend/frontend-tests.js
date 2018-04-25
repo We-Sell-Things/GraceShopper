@@ -243,7 +243,7 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
     });
 
     it('renders `Order History: in h1 tag`', () => {
-      expect(fakeWrapper.find('h1'));
+      expect(fakeWrapper.find('p'));
     });
   });
 })

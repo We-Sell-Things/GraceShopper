@@ -45,11 +45,11 @@ async function seed () {
     Product.create({title: 'Beer underwear', quantity: '5', description: 'Hide beer in your underwear easily!', price: '15', imgUrl: '/pics/beerunderwear.jpg', categoryId: '1'}),
     Product.create({title: 'Computer monitor cover', quantity: '5', description: 'When you want to not see the screen and not turn the screen off!', price: '52', imgUrl: '/pics/screencover.jpg', categoryId: '2'}),
     Product.create({title: 'Computer usb lamp', quantity: '5', description: 'For when you need extra brightness to your screen!', price: '2', imgUrl: '/pics/usblamp.jpg', categoryId: '2'}),
-    Product.create({title: 'Beer warmer', quantity: '5', description: 'For when your beer is too cold and it needs to be warmed!', price: '52', imgUrl: '/pics/beerwarmer.jpg', categoryId: '3'}),
+    Product.create({title: 'Beer warmer', quantity: '5', description: 'For when your beer is too cold and it needs to be warmed!', price: '52', imgUrl: '/pics/beerwarmer.jpg', categoryId: '4'}),
 
     Product.create({title: 'Pair of Egg Holders', quantity: '200', description: 'For when your eggs need to be held', price: '21', imgUrl: '/pics/eggholder.jpg', categoryId: '1'}),
     Product.create({title: 'Pool bbq', quantity: '51', description: 'For having bbqs in the pool!', price: '522', imgUrl: '/pics/bbqpool.jpg', categoryId: '5'}),
-    Product.create({title: 'Cat butthole bling', quantity: '500', description: 'For jazzing up your cats romantic life', price: '10', imgUrl: '/pics/catbling.jpg', categoryId: '3'}),
+    Product.create({title: 'Cat butthole bling', quantity: '500', description: 'For jazzing up your cats romantic life', price: '10', imgUrl: '/pics/catbling.jpg', categoryId: '4'}),
     Product.create({title: 'Cover of original artwork', quantity: '50', description: 'Good artwork of shit', price: '100', imgUrl: '/pics/artwork.jpg', categoryId: '6'}),
     Product.create({title: 'Boomerang Gun', quantity: '50', description: 'Shoots boomerang', price: '10', imgUrl: '/pics/gun.jpg', categoryId: '6'})
   ])
