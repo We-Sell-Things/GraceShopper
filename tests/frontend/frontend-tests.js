@@ -9,9 +9,9 @@ const adapter = new Adapter();
 Enzyme.configure({adapter});
 
 // components
+import { Orders } from '../../client/components/Orders'
 import {Products} from '../../client/components/products';
 import { SingleProduct } from '../../client/components/SingleProduct';
-import Orders from '../../client/components/Orders'
 
 //stores
 import { getProducts } from '../../client/store/products';
@@ -330,7 +330,7 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
     });
 
     it('renders `Order History: in h1 tag`', () => {
-      expect(fakeWrapper.find('h1'));
+      expect(fakeWrapper.find('h1').text().trim()).to.equal('Order History:');
     });
   });
 })

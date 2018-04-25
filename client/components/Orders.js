@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-const Orders = ({order}) => {
+export const Orders = ({order}) => {
   return (
     <div>
     <h1>Order History:</h1>
       {
-        order.map(singleOrder => (
+        order && order.map(singleOrder => (
           <Link to={`/orders/${singleOrder.id}`} key={singleOrder.id}>
           <p>
           <span>Order Number: {singleOrder.id} Total: ${singleOrder.subtotal}</span>
