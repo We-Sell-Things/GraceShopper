@@ -6,6 +6,7 @@ import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react'
 import { postToCart } from '../store'
 
 const Products = ({ products, handleAdd }) => {
+  console.log('hereee');
   return (
     <div style={{marginLeft: '10vw'}}>
     { products.length

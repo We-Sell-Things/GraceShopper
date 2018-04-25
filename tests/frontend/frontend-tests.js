@@ -1,11 +1,14 @@
 import React from 'react';
 import {createStore} from 'redux';
 import {expect} from 'chai';
-import {shallow} from 'enzyme';
+import enzyme, {shallow} from 'enzyme';
 import {spy} from 'sinon';
+import Adapter from 'enzyme-adapter-react-16'
+enzyme.configure({ adapter: new Adapter() })
 
 // components
 import productsComponent from '../../client/components/products';
+import { SingleProduct } from '../../client/components/SingleProduct';
 
 //stores
 import { getProducts } from '../../client/store/products';
@@ -13,7 +16,8 @@ import { getUser, removeUser } from '../../client/store/user';
 import { getCategories } from '../../client/store/categories';
 import cartReducer, { getCart, addToCart, removeFromCart } from '../../client/store/cart';
 import { Cart } from '../../client/components/cart';
-
+import singleProductReducer, { getSingleProduct } from '../../client/store/singleProduct';
+import { test } from 'mocha';
 
 
 describe('▒▒▒ Front-end tests ▒▒▒', function () {
@@ -52,6 +56,29 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   // PRODUCT REACT/REDUX
   describe('PRODUCT', () => {
+
+      describe('React Component', () => {
+
+        describe('Visual Content', () => {
+
+          // let testingStore = createStore(singleProductReducer);
+
+          let fakeProducts, fakeWrapper;
+          beforeEach('Create <SingleProduct /> wrapper', () => {
+            fakeProducts = [{title: 'test1', price: 10, imgUrl: 'pic.jpg'}, {title: 'test2', price: 20, imgUrl: 'pic.jpg'}]
+
+            fakeWrapper = shallow(<productsComponent products={fakeProducts} />)
+
+
+          })
+
+          it('renders', () => {
+            expect(fakeWrapper.find('p').text()).toEqual('light it');
+          })
+
+        })
+
+      })
 
     describe('Redux architecture', () => {
 
@@ -209,6 +236,64 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   })
 
+  // SINGLE PRODUCT REACT/REDUX
+  describe('singleProduct', () => {
 
+    describe('Redux architecture', () => {
+
+      describe('Action Creators', () => {
+
+        it('creates getSingleProduct action', () => {
+
+          const fakeProduct = {
+            id: 1,
+            title: 'candle',
+            description: 'light it',
+            price: 5,
+            quantity: 5,
+            imgUrl: 'candlePic.jpg',
+            categoryId: 4
+          };
+          expect(getSingleProduct(fakeProduct)).to.be.to.deep.equal({
+            type: 'GET_SINGLE_PRODUCT',
+            product: fakeProduct
+          })
+
+        });
+
+      });
+
+      describe('Reducer', () => {
+
+        let testingStore;
+        beforeEach('Create testing store', () => {
+          testingStore = createStore(singleProductReducer);
+        })
+
+        describe('GET_SINGLE_PRODUCT reducer', () => {
+
+          it('changes state when a product is fetched', () => {
+
+            const currentStoreState = testingStore.getState();
+
+            const testProduct = {id: 3, title: 'nothing'};
+            testingStore.dispatch({
+              type: 'GET_SINGLE_PRODUCT',
+              product: testProduct
+            })
+
+            const subsequentStoreState = testingStore.getState();
+
+            expect(currentStoreState).to.not.be.equal(subsequentStoreState);
+
+          });
+
+        })
+
+      })
+
+    });
+
+  })
 
 })
