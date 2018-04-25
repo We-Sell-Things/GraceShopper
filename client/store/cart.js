@@ -8,22 +8,22 @@ const CHECKOUT_CART = 'CHECKOUT_CART';
 //forth when we want to remove cart all together
 
 //action creators
-const getCart = cart => ({
+export const getCart = cart => ({
   type: GET_CART,
   cart
 });
 
-const addToCart = cart => ({
+export const addToCart = cart => ({
   type: ADD_TO_CART,
   cart
 });
 
-const removeFromCart = cart => ({
+export const removeFromCart = cart => ({
   type: REMOVE_FROM_CART,
   cart
 });
 
-const checkoutcart = cart => ({
+export const checkoutcart = cart => ({
   type: CHECKOUT_CART,
   cart
 })

@@ -5,7 +5,7 @@ import history from '../history';
 const GET_CATEGORIES = 'GET_CATEGORIES';
 
 //action creators
-const getCategories = categories => ({
+export const getCategories = categories => ({
   type: GET_CATEGORIES,
   categories
 });
