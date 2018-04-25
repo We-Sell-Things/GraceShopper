@@ -15,6 +15,7 @@ chai.use(chaiThings);
 const expect = chai.expect;
 import supertest from 'supertest-as-promised';
 import sinon from 'sinon';
+import { request } from 'https';
 
 require('../../server/api/users')
 
@@ -211,24 +212,19 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
           // *Assertion translation*:
           // This assertion expects that the Order model will:
 
-          //put an `price` column in the orders table
-          it('has price column', () => {
-            expect(Order.attributes.price).to.be.an('object');
+          //put an `subtotal` column in the orders table
+          it('has subtotal column', () => {
+            expect(Order.attributes.subtotal).to.be.an('object');
           });
 
-          //put a `productId` column in the orders table
-          it('has productId column', () => {
-            expect(Order.attributes.productId).to.be.an('object');
-          });
-
-          //put a `quantity` column in the orders table
-          it('has quantity column', () => {
-            expect(Order.attributes.quantity).to.be.an('object');
+          //put a `productIdAndQuantity` column in the orders table
+          it('has productIdAndQuantity column', () => {
+            expect(Order.attributes.productIdAndQuantity).to.be.an('object');
           });
         });
 
         describe('validations', () => {
-          it('requires a price', () => {
+          it('requires a subtotal', () => {
             const order = Order.build();
             return order.validate()
               .then(() => {
@@ -238,12 +234,12 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                 expect(err).to.exist;
                 expect(err).to.be.an('error');
                 expect(err.errors).to.contain.a.thing.with.properties({
-                  path: 'price',
+                  path: 'subtotal',
                   type: 'notNull Violation'
                 })
               });
           });
-          it('requires a productId', () => {
+          it('requires a productIdAndQuantity', () => {
             const order = Order.build();
             return order.validate()
               .then(() => {
@@ -253,22 +249,7 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                 expect(err).to.exist;
                 expect(err).to.be.an('error');
                 expect(err.errors).to.contain.a.thing.with.properties({
-                  path: 'productId',
-                  type: 'notNull Violation'
-                })
-              });
-          });
-          it('requires a quantity', () => {
-            const order = Order.build();
-            return order.validate()
-              .then(() => {
-                throw new Error ('Promise should have rejected');
-              })
-              .catch(err => {
-                expect(err).to.exist;
-                expect(err).to.be.an('error');
-                expect(err.errors).to.contain.a.thing.with.properties({
-                  path: 'quantity',
+                  path: 'productIdAndQuantity',
                   type: 'notNull Violation'
                 })
               });
@@ -435,9 +416,20 @@ describe('▒▒▒ Backend tests ▒▒▒', () => {
                           expect(res.body.length).to.be.equal(2);
                       });
               });
-
             });
 
+            describe('orders', () => {
+
+              it('serves up all orders on request to GET /', () => {
+                return agent
+                    .get('/api/orders')
+                    .expect(401) //get 401 because unauthorized
+                    .then(res => {
+                        expect(res.body).to.be.an('object');
+                        expect(res.body.length).to.be.equal(undefined);
+                    });
+            });
+            })
         });
 
     });

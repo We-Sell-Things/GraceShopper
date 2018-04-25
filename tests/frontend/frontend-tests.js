@@ -1,25 +1,33 @@
 import React from 'react';
 import {createStore} from 'redux';
-import chai, {expect} from 'chai';
-import enzyme, {shallow} from 'enzyme';
+import {expect} from 'chai';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import {spy} from 'sinon';
 // import Adapter from 'enzyme-adapter-react-16';
-// enzyme.configure({ adapter: new Adapter() })
+Enzyme.configure({ adapter: new Adapter() })
 
 import db from '../../server/db';
 const User = db.model('user');
 const Product = db.model('product');
 
+const adapter = new Adapter();
+Enzyme.configure({adapter});
+
 // components
-import productsComponent from '../../client/components/products';
+import {Products} from '../../client/components/products';
+import { SingleProduct } from '../../client/components/SingleProduct';
+import Orders from '../../client/components/Orders'
 
 //stores
 import { getProducts } from '../../client/store/products';
 import { getUser, removeUser } from '../../client/store/user';
 import { getCategories } from '../../client/store/categories';
+import singleOrderReducer, { getOrder } from '../../client/store/singleOrder';
 import cartReducer, { getCart, addToCart, removeFromCart } from '../../client/store/cart';
 import { Cart } from '../../client/components/cart';
-
+import singleProductReducer, { getSingleProduct } from '../../client/store/singleProduct';
+import { test } from 'mocha';
 
 
 describe('▒▒▒ Front-end tests ▒▒▒', function () {
@@ -59,6 +67,29 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
   // PRODUCT REACT/REDUX
   describe('PRODUCT', () => {
 
+      describe('React Component', () => {
+
+        describe('Visual Content', () => {
+
+          // let testingStore = createStore(singleProductReducer);
+
+          let fakeProducts, fakeWrapper;
+          beforeEach('Create <Products /> wrapper', () => {
+            fakeProducts = [{title: 'test1', price: 10, imgUrl: 'pic.jpg'}]
+
+            fakeWrapper = shallow(<Products products={fakeProducts} />)
+
+
+          })
+
+          it('renders', () => {
+            expect(fakeWrapper.find('h3').text()).to.be.equal('test1');
+          })
+
+        })
+
+      })
+
     describe('Redux architecture', () => {
 
       describe('Action Creators', () => {
@@ -78,8 +109,6 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
     });
 
   })
-
-
 
   // CATEGORY REACT/REDUX
   describe('CATEGORY', () => {
@@ -104,6 +133,22 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   })
 
+  describe('ORDER', () => {
+    describe('Redux architecture', () => {
+      describe('Action Creators', () => {
+        it('creates getOrder action', () => {
+          const testOrder = {
+            subtotal: 135,
+            productIdAndQuantity: {'1': 3}
+          };
+          expect(getOrder(testOrder)).to.be.to.deep.equal({
+            type: 'GET_ORDER',
+            order: testOrder
+          })
+        })
+      })
+    })
+  })
 
 
   // CART REACT/REDUX
@@ -224,6 +269,83 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
   })
 
+  // SINGLE PRODUCT REACT/REDUX
+  describe('singleProduct', () => {
 
+    describe('Redux architecture', () => {
 
+      describe('Action Creators', () => {
+
+        it('creates getSingleProduct action', () => {
+
+          const fakeProduct = {
+            id: 1,
+            title: 'candle',
+            description: 'light it',
+            price: 5,
+            quantity: 5,
+            imgUrl: 'candlePic.jpg',
+            categoryId: 4
+          };
+          expect(getSingleProduct(fakeProduct)).to.be.to.deep.equal({
+            type: 'GET_SINGLE_PRODUCT',
+            product: fakeProduct
+          })
+
+        });
+
+      });
+
+      describe('Reducer', () => {
+
+        let testingStore;
+        beforeEach('Create testing store', () => {
+          testingStore = createStore(singleProductReducer);
+        })
+
+        describe('GET_SINGLE_PRODUCT reducer', () => {
+
+          it('changes state when a product is fetched', () => {
+
+            const currentStoreState = testingStore.getState();
+
+            const testProduct = {id: 3, title: 'nothing'};
+            testingStore.dispatch({
+              type: 'GET_SINGLE_PRODUCT',
+              product: testProduct
+            })
+
+            const subsequentStoreState = testingStore.getState();
+
+            expect(currentStoreState).to.not.be.equal(subsequentStoreState);
+
+          });
+
+        })
+
+      })
+
+    });
+
+  })
+
+  describe('<Orders /> component', () => {
+    let testingStore = createStore(singleOrderReducer);
+
+    let orders, fakeWrapper;
+    beforeEach('Create <Orders /> wrapper', () => {
+      orders = [
+        {
+          id: 1,
+          subtotal: 137,
+          productIdAndQuantity: {'1': 2}
+        }
+      ];
+      fakeWrapper = shallow(<Orders orders={orders} store={testingStore} />)
+    });
+
+    it('renders `Order History: in h1 tag`', () => {
+      expect(fakeWrapper.find('h1'));
+    });
+  });
 })
