@@ -14,6 +14,6 @@ router.get('/', (req, res, next) => {
       .then(users => res.json(users))
       .catch(next)
   } else {
-    res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    res.status(401).redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
   }
 })
