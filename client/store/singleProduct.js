@@ -7,7 +7,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
 
 const singleProduct = {};
 
-const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
+export const getSingleProduct = product => ({type: GET_SINGLE_PRODUCT, product})
 
 export const fetchSingleProduct = (id) =>
   dispatch =>

@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import { Grid, Image, Icon, Button, Container } from 'semantic-ui-react'
 import { postToCart } from '../store'
 
-const Products = ({ products, handleAdd }) => {
+export const Products = ({ products, handleAdd }) => {
   return (
     <div style={{marginLeft: '10vw'}}>
     { products.length
