@@ -10,7 +10,7 @@ Enzyme.configure({adapter});
 
 // components
 import productsComponent from '../../client/components/products';
-import Orders from '../../client/components/Orders'
+import { Orders } from '../../client/components/Orders'
 
 //stores
 import { getProducts } from '../../client/store/products';
@@ -243,7 +243,7 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
     });
 
     it('renders `Order History: in h1 tag`', () => {
-      expect(fakeWrapper.find('p'));
+      expect(fakeWrapper.find('h1').text().trim()).to.equal('Order History:');
     });
   });
 })
