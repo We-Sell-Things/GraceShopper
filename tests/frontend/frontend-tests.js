@@ -4,6 +4,12 @@ import {expect} from 'chai';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {spy} from 'sinon';
+// import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() })
+
+import db from '../../server/db';
+const User = db.model('user');
+const Product = db.model('product');
 
 const adapter = new Adapter();
 Enzyme.configure({adapter});
@@ -152,13 +158,22 @@ describe('▒▒▒ Front-end tests ▒▒▒', function () {
 
       describe('Visual Content', () => {
 
-        let cartData, cartWrapper;
+        let cartData, productData, cartWrapper;
+        let productDataArr = [];
         beforeEach('Create <Cart /> wrapper', () => {
-          cartData = {
+          cartData = {"1": 3};
+          productData = Product.build({
             id: 1,
-            productIdAndQuantity: {"3": 2, "4": 5}
-          };
-          cartWrapper = shallow(<Cart />)
+            title: 'kleenex',
+            description: 'contains tissues',
+            price: '10'
+        });
+          productDataArr.push(productData.dataValues)
+          cartWrapper = shallow(<Cart cart={cartData} products={productDataArr}/>)
+        })
+
+        it('includes "QUANTITY" line as an h5', () => {
+          expect(cartWrapper.find('h2').text().trim()).to.equal('Subtotal: $30');
         })
 
       })
